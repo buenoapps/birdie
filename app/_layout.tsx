@@ -1,24 +1,81 @@
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { Stack } from 'expo-router';
+import * as Notifications from 'expo-notifications';
+import { Stack, router } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
+import { useEffect } from 'react';
+import { AppState } from 'react-native';
 import 'react-native-reanimated';
 
+import { BirdieDataProvider } from '@/hooks/use-birdie-data';
 import { useColorScheme } from '@/hooks/use-color-scheme';
+import {
+  ensurePermissions,
+  installNotificationHandler,
+  syncBirthdayNotifications,
+} from '@/lib/notifications';
 
 export const unstable_settings = {
   anchor: '(tabs)',
 };
 
+installNotificationHandler();
+
 export default function RootLayout() {
   const colorScheme = useColorScheme();
 
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      await ensurePermissions().catch(() => false);
+      if (cancelled) return;
+      await syncBirthdayNotifications().catch((err) =>
+        console.warn('Initial notification sync failed', err)
+      );
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  useEffect(() => {
+    const sub = AppState.addEventListener('change', (state) => {
+      if (state === 'active') {
+        syncBirthdayNotifications().catch((err) =>
+          console.warn('Foreground notification sync failed', err)
+        );
+      }
+    });
+    return () => sub.remove();
+  }, []);
+
+  useEffect(() => {
+    const sub = Notifications.addNotificationResponseReceivedListener((response) => {
+      const data = response.notification.request.content.data as
+        | { personType?: string; personId?: number }
+        | undefined;
+      if (data?.personType && typeof data.personId === 'number') {
+        router.push(`/birthday/${data.personType}/${data.personId}` as never);
+      }
+    });
+    return () => sub.remove();
+  }, []);
+
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
-      </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
+    <BirdieDataProvider>
+      <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+        <Stack>
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          <Stack.Screen name="family/new" options={{ presentation: 'modal', title: 'Add family' }} />
+          <Stack.Screen name="family/[id]" options={{ presentation: 'modal', title: 'Edit family' }} />
+          <Stack.Screen name="friends/new" options={{ presentation: 'modal', title: 'Add friend' }} />
+          <Stack.Screen name="friends/[id]" options={{ presentation: 'modal', title: 'Edit friend' }} />
+          <Stack.Screen
+            name="birthday/[type]/[id]"
+            options={{ presentation: 'modal', title: 'Birthday' }}
+          />
+        </Stack>
+        <StatusBar style="auto" />
+      </ThemeProvider>
+    </BirdieDataProvider>
   );
 }

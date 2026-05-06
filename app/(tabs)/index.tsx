@@ -1,98 +1,105 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
+import { useRouter } from 'expo-router';
+import { useMemo } from 'react';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { HelloWave } from '@/components/hello-wave';
-import ParallaxScrollView from '@/components/parallax-scroll-view';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { Link } from 'expo-router';
+import { BirthdayCard } from '@/components/birthday/BirthdayCard';
+import { BirdieHead } from '@/components/mascot/BirdieHead';
+import { EmptyState } from '@/components/ui/EmptyState';
+import { Colors } from '@/constants/theme';
+import type { UpcomingBirthday } from '@/db/types';
+import { useBirdieData } from '@/hooks/use-birdie-data';
+import { useColorScheme } from '@/hooks/use-color-scheme';
+import { bucketFor } from '@/lib/dates';
 
-export default function HomeScreen() {
+const SECTION_LABELS: Record<ReturnType<typeof bucketFor>, string> = {
+  today: '🎉 Today',
+  thisWeek: 'This week',
+  thisMonth: 'This month',
+  later: 'Later',
+};
+
+export default function UpcomingScreen() {
+  const router = useRouter();
+  const scheme = useColorScheme() ?? 'light';
+  const colors = Colors[scheme];
+  const { upcoming, ready } = useBirdieData();
+
+  const sections = useMemo(() => groupByBucket(upcoming), [upcoming]);
+
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12',
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <Link href="/modal">
-          <Link.Trigger>
-            <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-          </Link.Trigger>
-          <Link.Preview />
-          <Link.Menu>
-            <Link.MenuAction title="Action" icon="cube" onPress={() => alert('Action pressed')} />
-            <Link.MenuAction
-              title="Share"
-              icon="square.and.arrow.up"
-              onPress={() => alert('Share pressed')}
-            />
-            <Link.Menu title="More" icon="ellipsis">
-              <Link.MenuAction
-                title="Delete"
-                icon="trash"
-                destructive
-                onPress={() => alert('Delete pressed')}
-              />
-            </Link.Menu>
-          </Link.Menu>
-        </Link>
+    <SafeAreaView edges={['top']} style={[styles.safe, { backgroundColor: colors.background }]}>
+      <View style={styles.header}>
+        <BirdieHead size={56} />
+        <View style={{ flex: 1 }}>
+          <Text style={[styles.title, { color: colors.text }]}>Birdie</Text>
+          <Text style={[styles.subtitle, { color: colors.textMuted }]}>
+            Never miss a birthday again
+          </Text>
+        </View>
+      </View>
 
-        <ThemedText>
-          {`Tap the Explore tab to learn more about what's included in this starter app.`}
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          {`When you're ready, run `}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+      {ready && upcoming.length === 0 ? (
+        <View style={styles.empty}>
+          <EmptyState
+            title="No birthdays yet"
+            body="Add your family in the Family tab, then start adding their friends."
+          />
+        </View>
+      ) : (
+        <ScrollView contentContainerStyle={styles.list}>
+          {sections.map(({ key, items }) => (
+            <View key={key} style={styles.section}>
+              <Text style={[styles.sectionTitle, { color: colors.textMuted }]}>
+                {SECTION_LABELS[key]}
+              </Text>
+              <View style={{ gap: 10 }}>
+                {items.map((item) => (
+                  <BirthdayCard
+                    key={`${item.personType}-${item.personId}`}
+                    item={item}
+                    onPress={() =>
+                      router.push(`/birthday/${item.personType}/${item.personId}` as never)
+                    }
+                  />
+                ))}
+              </View>
+            </View>
+          ))}
+        </ScrollView>
+      )}
+    </SafeAreaView>
   );
 }
 
+function groupByBucket(items: UpcomingBirthday[]) {
+  const order: ReturnType<typeof bucketFor>[] = ['today', 'thisWeek', 'thisMonth', 'later'];
+  const grouped = new Map<ReturnType<typeof bucketFor>, UpcomingBirthday[]>();
+  for (const item of items) {
+    const key = bucketFor(item.daysUntil);
+    const list = grouped.get(key) ?? [];
+    list.push(item);
+    grouped.set(key, list);
+  }
+  return order
+    .filter((k) => (grouped.get(k)?.length ?? 0) > 0)
+    .map((key) => ({ key, items: grouped.get(key)! }));
+}
+
 const styles = StyleSheet.create({
-  titleContainer: {
+  safe: { flex: 1 },
+  header: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 8,
+    gap: 12,
+    paddingHorizontal: 20,
+    paddingTop: 8,
+    paddingBottom: 12,
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
-  },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
-  },
+  title: { fontSize: 28, fontWeight: '800' },
+  subtitle: { fontSize: 14, marginTop: 2 },
+  list: { padding: 20, paddingTop: 8, gap: 24 },
+  section: { gap: 8 },
+  sectionTitle: { fontSize: 13, fontWeight: '700', textTransform: 'uppercase', letterSpacing: 1 },
+  empty: { flex: 1, justifyContent: 'center' },
 });
