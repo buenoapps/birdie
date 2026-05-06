@@ -1,29 +1,54 @@
 /**
- * Below are the colors that are used in the app. The colors are defined in the light and dark mode.
- * There are many other ways to style your app. For example, [Nativewind](https://www.nativewind.dev/), [Tamagui](https://tamagui.dev/), [unistyles](https://reactnativeunistyles.vercel.app), etc.
+ * Birdie brand palette. Sunshine yellow + party pink anchor the playful feel,
+ * with mint and sky as supporting accents and a soft cream background.
  */
 
 import { Platform } from 'react-native';
 
-const tintColorLight = '#0a7ea4';
-const tintColorDark = '#fff';
+export const Brand = {
+  sunshine: '#FFD43B',
+  sunshineDeep: '#F5B700',
+  partyPink: '#FF5C8A',
+  partyPinkDeep: '#E63E70',
+  sky: '#5EC8F8',
+  mint: '#7BE0AD',
+  cream: '#FFF8E7',
+  ink: '#2A2438',
+  inkSoft: '#5C5470',
+  cloud: '#F5F1F8',
+};
+
+const tintColorLight = Brand.partyPinkDeep;
+const tintColorDark = Brand.sunshine;
 
 export const Colors = {
   light: {
-    text: '#11181C',
-    background: '#fff',
+    text: Brand.ink,
+    textMuted: Brand.inkSoft,
+    background: Brand.cream,
+    surface: '#FFFFFF',
     tint: tintColorLight,
-    icon: '#687076',
-    tabIconDefault: '#687076',
+    icon: Brand.inkSoft,
+    border: '#EFE6CF',
+    tabIconDefault: Brand.inkSoft,
     tabIconSelected: tintColorLight,
+    accent: Brand.partyPink,
+    accentSoft: '#FFD9E4',
+    success: '#2BA84A',
   },
   dark: {
-    text: '#ECEDEE',
-    background: '#151718',
+    text: '#F4ECFF',
+    textMuted: '#B8AED1',
+    background: '#1B1626',
+    surface: '#2A2438',
     tint: tintColorDark,
-    icon: '#9BA1A6',
-    tabIconDefault: '#9BA1A6',
+    icon: '#B8AED1',
+    border: '#3A3450',
+    tabIconDefault: '#B8AED1',
     tabIconSelected: tintColorDark,
+    accent: Brand.partyPink,
+    accentSoft: '#4A2A3A',
+    success: '#5BD476',
   },
 };
 
