@@ -1,4 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useScrollToTop } from '@react-navigation/native';
+import { File, Paths } from 'expo-file-system';
+import * as Sharing from 'expo-sharing';
+import { useEffect, useRef, useState } from 'react';
 import { Alert, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -7,6 +10,7 @@ import { PrimaryButton } from '@/components/ui/PrimaryButton';
 import { Colors } from '@/constants/theme';
 import { useBirdieData } from '@/hooks/use-birdie-data';
 import { useColorScheme } from '@/hooks/use-color-scheme';
+import { buildCsvExport, buildJsonExport, exportFilename } from '@/lib/export';
 import {
   ensurePermissions,
   syncBirthdayNotifications,
@@ -18,6 +22,8 @@ export default function SettingsTab() {
   const colors = Colors[scheme];
   const { family, friends, refresh } = useBirdieData();
   const [granted, setGranted] = useState<boolean | null>(null);
+  const scrollRef = useRef<ScrollView>(null);
+  useScrollToTop(scrollRef);
 
   useEffect(() => {
     ensurePermissions().then(setGranted).catch(() => setGranted(false));
@@ -34,9 +40,38 @@ export default function SettingsTab() {
     if (ok) await syncBirthdayNotifications();
   };
 
+  const handleExport = async (format: 'json' | 'csv') => {
+    if (family.length === 0 && friends.length === 0) {
+      Alert.alert('Nothing to export', 'Add some family or friends first.');
+      return;
+    }
+    try {
+      const content =
+        format === 'json' ? buildJsonExport(family, friends) : buildCsvExport(family, friends);
+      const filename = exportFilename(format);
+      const file = new File(Paths.cache, filename);
+      if (file.exists) file.delete();
+      file.create();
+      file.write(content);
+
+      const canShare = await Sharing.isAvailableAsync();
+      if (!canShare) {
+        Alert.alert('Saved', `Export written to ${file.uri}`);
+        return;
+      }
+      await Sharing.shareAsync(file.uri, {
+        mimeType: format === 'json' ? 'application/json' : 'text/csv',
+        dialogTitle: 'Export Birdie data',
+        UTI: format === 'json' ? 'public.json' : 'public.comma-separated-values-text',
+      });
+    } catch (err) {
+      Alert.alert('Export failed', String(err));
+    }
+  };
+
   return (
     <SafeAreaView edges={['top']} style={[styles.safe, { backgroundColor: colors.background }]}>
-      <ScrollView contentContainerStyle={styles.scroll}>
+      <ScrollView ref={scrollRef} contentContainerStyle={styles.scroll}>
         <View style={styles.heroBox}>
           <Birdie size={120} />
           <Text style={[styles.title, { color: colors.text }]}>Birdie</Text>
@@ -60,6 +95,15 @@ export default function SettingsTab() {
           {granted && (
             <PrimaryButton variant="secondary" title="Re-sync schedule" onPress={handleResync} />
           )}
+        </Section>
+
+        <Section title="Export" colors={colors}>
+          <Text style={[styles.body, { color: colors.text }]}>
+            Save a backup of all family members and friends. The share sheet lets you send the
+            file to email, files, or another app.
+          </Text>
+          <PrimaryButton title="Export as JSON" onPress={() => handleExport('json')} />
+          <PrimaryButton variant="secondary" title="Export as CSV" onPress={() => handleExport('csv')} />
         </Section>
 
         <Section title="Data" colors={colors}>

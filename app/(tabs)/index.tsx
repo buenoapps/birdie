@@ -1,5 +1,6 @@
+import { useScrollToTop } from '@react-navigation/native';
 import { useRouter } from 'expo-router';
-import { useMemo } from 'react';
+import { useMemo, useRef } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -24,6 +25,8 @@ export default function UpcomingScreen() {
   const scheme = useColorScheme() ?? 'light';
   const colors = Colors[scheme];
   const { upcoming, ready } = useBirdieData();
+  const scrollRef = useRef<ScrollView>(null);
+  useScrollToTop(scrollRef);
 
   const sections = useMemo(() => groupByBucket(upcoming), [upcoming]);
 
@@ -47,7 +50,7 @@ export default function UpcomingScreen() {
           />
         </View>
       ) : (
-        <ScrollView contentContainerStyle={styles.list}>
+        <ScrollView ref={scrollRef} contentContainerStyle={styles.list}>
           {sections.map(({ key, items }) => (
             <View key={key} style={styles.section}>
               <Text style={[styles.sectionTitle, { color: colors.textMuted }]}>

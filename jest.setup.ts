@@ -20,6 +20,22 @@ jest.mock('expo-haptics', () => ({
   ImpactFeedbackStyle: { Light: 'light', Medium: 'medium', Heavy: 'heavy' },
 }));
 
+jest.mock('expo-file-system', () => ({
+  File: jest.fn().mockImplementation(() => ({
+    exists: false,
+    uri: 'file:///mock/path',
+    create: jest.fn(),
+    write: jest.fn(),
+    delete: jest.fn(),
+  })),
+  Paths: { cache: '/mock/cache', document: '/mock/doc' },
+}));
+
+jest.mock('expo-sharing', () => ({
+  isAvailableAsync: jest.fn().mockResolvedValue(true),
+  shareAsync: jest.fn().mockResolvedValue(undefined),
+}));
+
 jest.mock('expo-router', () => ({
   router: { push: jest.fn(), back: jest.fn(), replace: jest.fn() },
   useRouter: () => ({ push: jest.fn(), back: jest.fn(), replace: jest.fn() }),

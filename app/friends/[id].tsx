@@ -1,9 +1,10 @@
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useMemo, useState } from 'react';
-import { Alert, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Alert, StyleSheet, Text } from 'react-native';
 
 import { AssigneePicker } from '@/components/birthday/AssigneePicker';
 import { PersonForm, type PersonFormValues } from '@/components/birthday/PersonForm';
+import { ModalScreen } from '@/components/ui/ModalScreen';
 import { PrimaryButton } from '@/components/ui/PrimaryButton';
 import { Colors } from '@/constants/theme';
 import { useBirdieData } from '@/hooks/use-birdie-data';
@@ -29,9 +30,9 @@ export default function EditFriend() {
 
   if (!friend) {
     return (
-      <View style={[styles.container, { backgroundColor: colors.background, padding: 20 }]}>
+      <ModalScreen>
         <Text style={{ color: colors.text }}>Friend not found.</Text>
-      </View>
+      </ModalScreen>
     );
   }
 
@@ -67,30 +68,23 @@ export default function EditFriend() {
   };
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-      style={[styles.container, { backgroundColor: colors.background }]}
-    >
-      <ScrollView contentContainerStyle={styles.scroll}>
-        <Text style={[styles.title, { color: colors.text }]}>Edit friend</Text>
-        <PersonForm
-          initial={values}
-          showNotes
-          onChange={(next, isValid) => {
-            setValues(next);
-            setValid(isValid);
-          }}
-        />
-        <AssigneePicker members={family} selectedIds={assigneeIds} onChange={setAssigneeIds} />
-        <PrimaryButton title={saving ? 'Saving…' : 'Save changes'} onPress={onSave} disabled={!valid || saving} />
-        <PrimaryButton variant="ghost" title="Delete" onPress={onDelete} />
-      </ScrollView>
-    </KeyboardAvoidingView>
+    <ModalScreen>
+      <Text style={[styles.title, { color: colors.text }]}>Edit friend</Text>
+      <PersonForm
+        initial={values}
+        showNotes
+        onChange={(next, isValid) => {
+          setValues(next);
+          setValid(isValid);
+        }}
+      />
+      <AssigneePicker members={family} selectedIds={assigneeIds} onChange={setAssigneeIds} />
+      <PrimaryButton title={saving ? 'Saving…' : 'Save changes'} onPress={onSave} disabled={!valid || saving} />
+      <PrimaryButton variant="ghost" title="Delete" onPress={onDelete} />
+    </ModalScreen>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1 },
-  scroll: { padding: 20, gap: 18 },
   title: { fontSize: 24, fontWeight: '800' },
 });
