@@ -1,8 +1,9 @@
 import { useRouter } from 'expo-router';
 import { useState } from 'react';
-import { Alert, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Alert, StyleSheet, Text, View } from 'react-native';
 
 import { ColorPicker, PersonForm, type PersonFormValues } from '@/components/birthday/PersonForm';
+import { ModalScreen } from '@/components/ui/ModalScreen';
 import { PrimaryButton } from '@/components/ui/PrimaryButton';
 import { Brand, Colors } from '@/constants/theme';
 import { useBirdieData } from '@/hooks/use-birdie-data';
@@ -32,32 +33,25 @@ export default function NewFamilyMember() {
   };
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-      style={[styles.container, { backgroundColor: colors.background }]}
-    >
-      <ScrollView contentContainerStyle={styles.scroll}>
-        <Text style={[styles.title, { color: colors.text }]}>New family member</Text>
-        <PersonForm
-          initial={values}
-          onChange={(next, isValid) => {
-            setValues(next);
-            setValid(isValid);
-          }}
-        />
-        <View style={{ gap: 6 }}>
-          <Text style={[styles.label, { color: colors.textMuted }]}>Color</Text>
-          <ColorPicker value={color} onChange={setColor} />
-        </View>
-        <PrimaryButton title={saving ? 'Saving…' : 'Save'} onPress={onSave} disabled={!valid || saving} />
-      </ScrollView>
-    </KeyboardAvoidingView>
+    <ModalScreen>
+      <Text style={[styles.title, { color: colors.text }]}>New family member</Text>
+      <PersonForm
+        initial={values}
+        onChange={(next, isValid) => {
+          setValues(next);
+          setValid(isValid);
+        }}
+      />
+      <View style={{ gap: 6 }}>
+        <Text style={[styles.label, { color: colors.textMuted }]}>Color</Text>
+        <ColorPicker value={color} onChange={setColor} />
+      </View>
+      <PrimaryButton title={saving ? 'Saving…' : 'Save'} onPress={onSave} disabled={!valid || saving} />
+    </ModalScreen>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1 },
-  scroll: { padding: 20, gap: 18 },
   title: { fontSize: 24, fontWeight: '800' },
   label: { fontSize: 13, fontWeight: '600', textTransform: 'uppercase', letterSpacing: 0.5 },
 });

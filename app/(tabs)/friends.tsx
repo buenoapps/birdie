@@ -1,4 +1,6 @@
+import { useScrollToTop } from '@react-navigation/native';
 import { useRouter } from 'expo-router';
+import { useRef } from 'react';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -15,6 +17,8 @@ export default function FriendsTab() {
   const scheme = useColorScheme() ?? 'light';
   const colors = Colors[scheme];
   const { friends, family } = useBirdieData();
+  const scrollRef = useRef<ScrollView>(null);
+  useScrollToTop(scrollRef);
 
   const memberById = new Map(family.map((m) => [m.id, m]));
 
@@ -43,7 +47,7 @@ export default function FriendsTab() {
           </View>
         </View>
       ) : (
-        <ScrollView contentContainerStyle={styles.list}>
+        <ScrollView ref={scrollRef} contentContainerStyle={styles.list}>
           {friends.map((friend) => {
             const age = ageOnNextBirthday(friend.birthday);
             const days = daysUntil(friend.birthday);
