@@ -8,6 +8,7 @@ import { PrimaryButton } from '@/components/ui/PrimaryButton';
 import { Brand, Colors } from '@/constants/theme';
 import { useBirdieData } from '@/hooks/use-birdie-data';
 import { useColorScheme } from '@/hooks/use-color-scheme';
+import { t } from '@/lib/i18n';
 
 export default function EditFamilyMember() {
   const router = useRouter();
@@ -29,7 +30,7 @@ export default function EditFamilyMember() {
   if (!member) {
     return (
       <ModalScreen>
-        <Text style={{ color: colors.text }}>Family member not found.</Text>
+        <Text style={{ color: colors.text }}>{t('screen.family.notFound')}</Text>
       </ModalScreen>
     );
   }
@@ -41,16 +42,16 @@ export default function EditFamilyMember() {
       await updateFamilyMember(member.id, { name: values.name, birthday: values.birthday, color });
       router.back();
     } catch (err) {
-      Alert.alert('Could not save', String(err));
+      Alert.alert(t('modal.saveErrorTitle'), String(err));
       setSaving(false);
     }
   };
 
   const onDelete = () => {
-    Alert.alert('Delete family member?', `${member.name} and all friend assignments will be removed.`, [
-      { text: 'Cancel', style: 'cancel' },
+    Alert.alert(t('modal.deleteFamilyTitle'), t('modal.deleteFamilyBody', { name: member.name }), [
+      { text: t('modal.cancelCta'), style: 'cancel' },
       {
-        text: 'Delete',
+        text: t('modal.deleteCta'),
         style: 'destructive',
         onPress: async () => {
           await deleteFamilyMember(member.id);
@@ -62,7 +63,7 @@ export default function EditFamilyMember() {
 
   return (
     <ModalScreen>
-      <Text style={[styles.title, { color: colors.text }]}>Edit family member</Text>
+      <Text style={[styles.title, { color: colors.text }]}>{t('modal.editFamilyTitle')}</Text>
       <PersonForm
         initial={values}
         onChange={(next, isValid) => {
@@ -71,11 +72,11 @@ export default function EditFamilyMember() {
         }}
       />
       <View style={{ gap: 6 }}>
-        <Text style={[styles.label, { color: colors.textMuted }]}>Color</Text>
+        <Text style={[styles.label, { color: colors.textMuted }]}>{t('form.colorLabel')}</Text>
         <ColorPicker value={color} onChange={setColor} />
       </View>
-      <PrimaryButton title={saving ? 'Saving…' : 'Save changes'} onPress={onSave} disabled={!valid || saving} />
-      <PrimaryButton variant="ghost" title="Delete" onPress={onDelete} />
+      <PrimaryButton title={saving ? t('modal.savingCta') : t('modal.saveChangesCta')} onPress={onSave} disabled={!valid || saving} />
+      <PrimaryButton variant="ghost" title={t('modal.deleteCta')} onPress={onDelete} />
     </ModalScreen>
   );
 }

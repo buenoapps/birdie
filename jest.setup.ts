@@ -20,6 +20,10 @@ jest.mock('expo-haptics', () => ({
   ImpactFeedbackStyle: { Light: 'light', Medium: 'medium', Heavy: 'heavy' },
 }));
 
+jest.mock('expo-localization', () => ({
+  getLocales: () => [{ languageCode: 'en', languageTag: 'en-US' }],
+}));
+
 jest.mock('expo-file-system', () => ({
   File: jest.fn().mockImplementation(() => ({
     exists: false,

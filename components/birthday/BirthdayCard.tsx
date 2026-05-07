@@ -4,6 +4,7 @@ import { Brand, Colors } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import type { UpcomingBirthday } from '@/db/types';
 import { formatRelativeDays } from '@/lib/dates';
+import { t } from '@/lib/i18n';
 
 type Props = {
   item: UpcomingBirthday;
@@ -40,25 +41,25 @@ export function BirthdayCard({ item, onPress }: Props) {
           </Text>
           {item.personType === 'friend' ? (
             <View style={[styles.tag, { backgroundColor: colors.accentSoft }]}>
-              <Text style={[styles.tagText, { color: colors.accent }]}>friend</Text>
+              <Text style={[styles.tagText, { color: colors.accent }]}>{t('card.tagFriend')}</Text>
             </View>
           ) : (
             <View style={[styles.tag, { backgroundColor: '#FFF3C4' }]}>
-              <Text style={[styles.tagText, { color: Brand.sunshineDeep }]}>family</Text>
+              <Text style={[styles.tagText, { color: Brand.sunshineDeep }]}>{t('card.tagFamily')}</Text>
             </View>
           )}
         </View>
         <Text style={[styles.subline, { color: colors.textMuted }]}>
-          {isToday ? '🎂 Birthday today!' : formatRelativeDays(item.daysUntil)}
-          {item.ageOnNext !== null ? ` · turning ${item.ageOnNext}` : ''}
+          {isToday ? t('card.todayLabel') : formatRelativeDays(item.daysUntil)}
+          {item.ageOnNext !== null ? ` · ${t('card.turningSuffix', { age: item.ageOnNext })}` : ''}
         </Text>
         {item.assigneeNames.length > 0 && (
           <Text style={[styles.subline, { color: colors.textMuted }]} numberOfLines={1}>
-            Friend of {item.assigneeNames.join(', ')}
+            {t('card.friendOfPrefix', { names: item.assigneeNames.join(', ') })}
           </Text>
         )}
         {item.acknowledgedThisYear && isToday && (
-          <Text style={[styles.acked, { color: colors.success }]}>✓ Message sent</Text>
+          <Text style={[styles.acked, { color: colors.success }]}>{t('card.messageSent')}</Text>
         )}
       </View>
     </Pressable>

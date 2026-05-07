@@ -8,6 +8,7 @@ import 'react-native-reanimated';
 
 import { BirdieDataProvider } from '@/hooks/use-birdie-data';
 import { useColorScheme } from '@/hooks/use-color-scheme';
+import { t } from '@/lib/i18n';
 import {
   ensurePermissions,
   installNotificationHandler,
@@ -65,13 +66,13 @@ export default function RootLayout() {
       <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
         <Stack>
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="family/new" options={{ presentation: 'modal', title: 'Add family' }} />
-          <Stack.Screen name="family/[id]" options={{ presentation: 'modal', title: 'Edit family' }} />
-          <Stack.Screen name="friends/new" options={{ presentation: 'modal', title: 'Add friend' }} />
-          <Stack.Screen name="friends/[id]" options={{ presentation: 'modal', title: 'Edit friend' }} />
+          <Stack.Screen name="family/new" options={{ presentation: 'modal', title: t('modal.stackAddFamily') }} />
+          <Stack.Screen name="family/[id]" options={{ presentation: 'modal', title: t('modal.stackEditFamily') }} />
+          <Stack.Screen name="friends/new" options={{ presentation: 'modal', title: t('modal.stackAddFriend') }} />
+          <Stack.Screen name="friends/[id]" options={{ presentation: 'modal', title: t('modal.stackEditFriend') }} />
           <Stack.Screen
             name="birthday/[type]/[id]"
-            options={{ presentation: 'modal', title: 'Birthday' }}
+            options={{ presentation: 'modal', title: t('modal.stackBirthday') }}
           />
         </Stack>
         <StatusBar style="auto" />

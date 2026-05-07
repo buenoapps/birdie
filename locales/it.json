@@ -1,0 +1,130 @@
+{
+  "nav": {
+    "upcoming": "In arrivo",
+    "family": "Famiglia",
+    "friends": "Amici",
+    "settings": "Impostazioni"
+  },
+  "screen": {
+    "upcoming": {
+      "title": "Birdie",
+      "subtitle": "Non dimenticare più nessun compleanno",
+      "emptyTitle": "Nessun compleanno",
+      "emptyBody": "Aggiungi la tua famiglia nella scheda Famiglia, poi inizia ad aggiungere i loro amici.",
+      "sectionToday": "🎉 Oggi",
+      "sectionThisWeek": "Questa settimana",
+      "sectionThisMonth": "Questo mese",
+      "sectionLater": "Più avanti"
+    },
+    "family": {
+      "title": "Famiglia",
+      "emptyTitle": "Aggiungi la tua famiglia",
+      "emptyBody": "Inizia con le persone di casa: figli, partner, genitori.",
+      "addCta": "Aggiungi un familiare",
+      "addAccessibility": "Aggiungi familiare",
+      "notFound": "Familiare non trovato."
+    },
+    "friends": {
+      "title": "Amici",
+      "emptyTitle": "Nessun amico",
+      "emptyBody": "Aggiungi gli amici da ricordare — soprattutto gli amici dei tuoi figli.",
+      "addCta": "Aggiungi un amico",
+      "addAccessibility": "Aggiungi amico",
+      "notFound": "Amico non trovato.",
+      "friendOfPrefix": "Amico di {{names}}"
+    },
+    "settings": {
+      "stats": "{{family}} famiglia · {{friends}} amici",
+      "notificationsHeader": "Notifiche",
+      "notificationsBody": "Birdie ti avvisa ogni ora in punto dalle {{start}}:00 alle {{end}}:00 il giorno del compleanno — finché non tocchi",
+      "notificationsBodyEmphasis": "Ho inviato un messaggio!",
+      "notificationsBodySuffix": "nella schermata del compleanno.",
+      "permissionGranted": "Permesso: concesso ✓",
+      "permissionDenied": "Permesso: non concesso",
+      "permissionChecking": "Permesso: verifica in corso…",
+      "enableCta": "Abilita notifiche",
+      "resyncCta": "Risincronizza",
+      "resyncDone": "Notifiche risincronizzate.",
+      "exportHeader": "Esporta",
+      "exportBody": "Salva un backup di tutti i familiari e gli amici. Il foglio di condivisione ti permette di inviare il file via email, in File o in un'altra app.",
+      "exportJsonCta": "Esporta come JSON",
+      "exportCsvCta": "Esporta come CSV",
+      "exportShareTitle": "Esporta dati Birdie",
+      "nothingToExport": "Niente da esportare",
+      "nothingToExportBody": "Aggiungi prima qualche familiare o amico.",
+      "exportFailedTitle": "Esportazione non riuscita",
+      "exportSavedTitle": "Salvato",
+      "exportSavedBody": "Esportazione salvata in {{uri}}",
+      "dataHeader": "Dati",
+      "dataBody": "Tutti i dati restano su questo dispositivo (SQLite). Reinstallando l'app verranno cancellati.",
+      "refreshCta": "Aggiorna dati",
+      "alertTitle": "Birdie"
+    },
+    "detail": {
+      "notFound": "Persona non trovata.",
+      "todayBanner": "🎂 Compleanno oggi!",
+      "nextBirthday": "Prossimo compleanno",
+      "turning": "Compie",
+      "friendOf": "Amico di",
+      "notes": "Note",
+      "sentCta": "🎉 Ho inviato un messaggio!",
+      "sentAcked": "✓ L'hai segnato come inviato. Birdie smetterà di ricordartelo.",
+      "undoCta": "Annulla",
+      "closeCta": "Chiudi"
+    }
+  },
+  "card": {
+    "tagFamily": "famiglia",
+    "tagFriend": "amico",
+    "todayLabel": "🎂 Compleanno oggi!",
+    "messageSent": "✓ Messaggio inviato",
+    "turningSuffix": "compie {{age}} anni",
+    "friendOfPrefix": "Amico di {{names}}"
+  },
+  "form": {
+    "nameLabel": "Nome",
+    "namePlaceholder": "es. Max",
+    "birthdayLabel": "Compleanno (AAAA-MM-GG)",
+    "birthdayPlaceholder": "2018-08-23",
+    "birthdayHint": "Usa 0000 come anno se non lo conosci (es. 0000-08-23).",
+    "notesLabel": "Note (facoltativo)",
+    "notesPlaceholder": "Adora i dinosauri, allergico alle arachidi…",
+    "colorLabel": "Colore",
+    "assigneesLabel": "Amico di",
+    "assigneesEmpty": "Aggiungi prima un familiare per collegare questo amico a qualcuno.",
+    "colorSwatchA11y": "Seleziona il colore {{color}}"
+  },
+  "modal": {
+    "newFamilyTitle": "Nuovo familiare",
+    "editFamilyTitle": "Modifica familiare",
+    "newFriendTitle": "Nuovo amico",
+    "editFriendTitle": "Modifica amico",
+    "saveCta": "Salva",
+    "savingCta": "Salvataggio…",
+    "saveChangesCta": "Salva modifiche",
+    "deleteCta": "Elimina",
+    "saveErrorTitle": "Impossibile salvare",
+    "deleteFamilyTitle": "Eliminare familiare?",
+    "deleteFamilyBody": "{{name}} e tutte le associazioni con gli amici verranno rimossi.",
+    "deleteFriendTitle": "Eliminare amico?",
+    "deleteFriendBody": "{{name}} verrà rimosso.",
+    "cancelCta": "Annulla",
+    "stackAddFamily": "Aggiungi famiglia",
+    "stackEditFamily": "Modifica famiglia",
+    "stackAddFriend": "Aggiungi amico",
+    "stackEditFriend": "Modifica amico",
+    "stackBirthday": "Compleanno"
+  },
+  "date": {
+    "today": "Oggi!",
+    "tomorrow": "Domani",
+    "inDays": "Tra {{count}} giorni",
+    "nextWeek": "La prossima settimana",
+    "nextMonth": "Il prossimo mese"
+  },
+  "notification": {
+    "title": "🎂 Oggi è il compleanno di {{name}}!",
+    "body": "Tocca quando hai inviato gli auguri — Birdie smetterà di avvisarti.",
+    "channelName": "Promemoria compleanni"
+  }
+}

@@ -97,14 +97,16 @@ export function bucketFor(daysAway: number): 'today' | 'thisWeek' | 'thisMonth' 
   return 'later';
 }
 
+import { t } from './i18n';
+
 export function formatRelativeDays(daysAway: number): string {
-  if (daysAway === 0) return 'Today!';
-  if (daysAway === 1) return 'Tomorrow';
-  if (daysAway < 7) return `In ${daysAway} days`;
-  if (daysAway < 14) return 'Next week';
-  if (daysAway < 31) return `In ${daysAway} days`;
-  if (daysAway < 60) return 'Next month';
-  return `In ${daysAway} days`;
+  if (daysAway === 0) return t('date.today');
+  if (daysAway === 1) return t('date.tomorrow');
+  if (daysAway < 7) return t('date.inDays', { count: daysAway });
+  if (daysAway < 14) return t('date.nextWeek');
+  if (daysAway < 31) return t('date.inDays', { count: daysAway });
+  if (daysAway < 60) return t('date.nextMonth');
+  return t('date.inDays', { count: daysAway });
 }
 
 const MONTH_NAMES = [

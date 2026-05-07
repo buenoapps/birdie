@@ -11,6 +11,7 @@ import { Brand, Colors } from '@/constants/theme';
 import { useBirdieData } from '@/hooks/use-birdie-data';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { ageOnNextBirthday, daysUntil, formatRelativeDays } from '@/lib/dates';
+import { t } from '@/lib/i18n';
 
 export default function FriendsTab() {
   const router = useRouter();
@@ -25,11 +26,11 @@ export default function FriendsTab() {
   return (
     <SafeAreaView edges={['top']} style={[styles.safe, { backgroundColor: colors.background }]}>
       <View style={styles.header}>
-        <Text style={[styles.title, { color: colors.text }]}>Friends</Text>
+        <Text style={[styles.title, { color: colors.text }]}>{t('screen.friends.title')}</Text>
         <Pressable
           onPress={() => router.push('/friends/new' as never)}
           accessibilityRole="button"
-          accessibilityLabel="Add friend"
+          accessibilityLabel={t('screen.friends.addAccessibility')}
           style={[styles.fab, { backgroundColor: Brand.partyPink }]}
         >
           <IconSymbol name="plus" size={22} color="#FFFFFF" />
@@ -39,11 +40,11 @@ export default function FriendsTab() {
       {friends.length === 0 ? (
         <View style={styles.empty}>
           <EmptyState
-            title="No friends yet"
-            body="Add the friends you want to remember — especially your kids' friends."
+            title={t('screen.friends.emptyTitle')}
+            body={t('screen.friends.emptyBody')}
           />
           <View style={{ alignItems: 'center', marginTop: 8 }}>
-            <PrimaryButton title="Add a friend" onPress={() => router.push('/friends/new' as never)} />
+            <PrimaryButton title={t('screen.friends.addCta')} onPress={() => router.push('/friends/new' as never)} />
           </View>
         </View>
       ) : (
@@ -69,11 +70,11 @@ export default function FriendsTab() {
                   <Text style={[styles.rowName, { color: colors.text }]}>{friend.name}</Text>
                   <Text style={[styles.rowSub, { color: colors.textMuted }]}>
                     {formatRelativeDays(days)}
-                    {age !== null ? ` · turning ${age}` : ''}
+                    {age !== null ? ` · ${t('card.turningSuffix', { age })}` : ''}
                   </Text>
                   {assignees ? (
                     <Text style={[styles.rowSub, { color: colors.textMuted }]} numberOfLines={1}>
-                      Friend of {assignees}
+                      {t('screen.friends.friendOfPrefix', { names: assignees })}
                     </Text>
                   ) : null}
                 </View>

@@ -3,6 +3,7 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { Colors } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import type { FamilyMember } from '@/db/types';
+import { t } from '@/lib/i18n';
 
 type Props = {
   members: FamilyMember[];
@@ -17,9 +18,9 @@ export function AssigneePicker({ members, selectedIds, onChange }: Props) {
   if (members.length === 0) {
     return (
       <View>
-        <Text style={[styles.label, { color: colors.textMuted }]}>Friend of</Text>
+        <Text style={[styles.label, { color: colors.textMuted }]}>{t('form.assigneesLabel')}</Text>
         <Text style={[styles.empty, { color: colors.textMuted }]}>
-          Add a family member first to link this friend to someone.
+          {t('form.assigneesEmpty')}
         </Text>
       </View>
     );
@@ -31,7 +32,7 @@ export function AssigneePicker({ members, selectedIds, onChange }: Props) {
 
   return (
     <View style={styles.container}>
-      <Text style={[styles.label, { color: colors.textMuted }]}>Friend of</Text>
+      <Text style={[styles.label, { color: colors.textMuted }]}>{t('form.assigneesLabel')}</Text>
       <View style={styles.chips}>
         {members.map((m) => {
           const selected = selectedIds.includes(m.id);

@@ -10,6 +10,7 @@ import type { PersonType } from '@/db/types';
 import { useBirdieData } from '@/hooks/use-birdie-data';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { ageOnNextBirthday, formatLongDate, formatRelativeDays, nextOccurrence } from '@/lib/dates';
+import { t } from '@/lib/i18n';
 
 export default function BirthdayDetail() {
   const router = useRouter();
@@ -33,7 +34,7 @@ export default function BirthdayDetail() {
   if (!person) {
     return (
       <SafeAreaView style={[styles.safe, { backgroundColor: colors.background }]}>
-        <Text style={{ color: colors.text, padding: 20 }}>Person not found.</Text>
+        <Text style={{ color: colors.text, padding: 20 }}>{t('screen.detail.notFound')}</Text>
       </SafeAreaView>
     );
   }
@@ -58,24 +59,24 @@ export default function BirthdayDetail() {
           <Birdie size={160} withConfetti={isToday} />
           <Text style={[styles.name, { color: colors.text }]}>{person.name}</Text>
           <Text style={[styles.subtitle, { color: colors.textMuted }]}>
-            {isToday ? '🎂 Birthday today!' : formatRelativeDays(upcomingItem?.daysUntil ?? 0)}
+            {isToday ? t('screen.detail.todayBanner') : formatRelativeDays(upcomingItem?.daysUntil ?? 0)}
           </Text>
         </View>
 
         <View style={[styles.card, { backgroundColor: colors.surface, borderColor: colors.border }]}>
-          <Row label="Next birthday" value={formatLongDate(occurrence)} colors={colors} />
-          {age !== null && <Row label="Turning" value={`${age}`} colors={colors} />}
+          <Row label={t('screen.detail.nextBirthday')} value={formatLongDate(occurrence)} colors={colors} />
+          {age !== null && <Row label={t('screen.detail.turning')} value={`${age}`} colors={colors} />}
           {type === 'friend' && upcomingItem?.assigneeNames.length ? (
-            <Row label="Friend of" value={upcomingItem.assigneeNames.join(', ')} colors={colors} />
+            <Row label={t('screen.detail.friendOf')} value={upcomingItem.assigneeNames.join(', ')} colors={colors} />
           ) : null}
           {type === 'friend' && 'notes' in person && person.notes ? (
-            <Row label="Notes" value={person.notes} colors={colors} />
+            <Row label={t('screen.detail.notes')} value={person.notes} colors={colors} />
           ) : null}
         </View>
 
         {isToday && !acked && (
           <PrimaryButton
-            title="🎉 I sent a message!"
+            title={t('screen.detail.sentCta')}
             onPress={onMarkSent}
             style={{ backgroundColor: Brand.partyPink }}
           />
@@ -83,13 +84,13 @@ export default function BirthdayDetail() {
         {isToday && acked && (
           <View style={{ gap: 10 }}>
             <Text style={[styles.acked, { color: colors.success }]}>
-              ✓ You marked this as sent. Birdie will stop reminding you.
+              {t('screen.detail.sentAcked')}
             </Text>
-            <PrimaryButton variant="ghost" title="Undo" onPress={onUnmark} />
+            <PrimaryButton variant="ghost" title={t('screen.detail.undoCta')} onPress={onUnmark} />
           </View>
         )}
 
-        <PrimaryButton variant="ghost" title="Close" onPress={() => router.back()} />
+        <PrimaryButton variant="ghost" title={t('screen.detail.closeCta')} onPress={() => router.back()} />
       </ScrollView>
     </SafeAreaView>
   );

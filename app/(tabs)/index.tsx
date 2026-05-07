@@ -12,12 +12,19 @@ import type { UpcomingBirthday } from '@/db/types';
 import { useBirdieData } from '@/hooks/use-birdie-data';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { bucketFor } from '@/lib/dates';
+import { t } from '@/lib/i18n';
 
-const SECTION_LABELS: Record<ReturnType<typeof bucketFor>, string> = {
-  today: '🎉 Today',
-  thisWeek: 'This week',
-  thisMonth: 'This month',
-  later: 'Later',
+const sectionLabel = (key: ReturnType<typeof bucketFor>): string => {
+  switch (key) {
+    case 'today':
+      return t('screen.upcoming.sectionToday');
+    case 'thisWeek':
+      return t('screen.upcoming.sectionThisWeek');
+    case 'thisMonth':
+      return t('screen.upcoming.sectionThisMonth');
+    default:
+      return t('screen.upcoming.sectionLater');
+  }
 };
 
 export default function UpcomingScreen() {
@@ -35,9 +42,9 @@ export default function UpcomingScreen() {
       <View style={styles.header}>
         <BirdieHead size={56} />
         <View style={{ flex: 1 }}>
-          <Text style={[styles.title, { color: colors.text }]}>Birdie</Text>
+          <Text style={[styles.title, { color: colors.text }]}>{t('screen.upcoming.title')}</Text>
           <Text style={[styles.subtitle, { color: colors.textMuted }]}>
-            Never miss a birthday again
+            {t('screen.upcoming.subtitle')}
           </Text>
         </View>
       </View>
@@ -45,8 +52,8 @@ export default function UpcomingScreen() {
       {ready && upcoming.length === 0 ? (
         <View style={styles.empty}>
           <EmptyState
-            title="No birthdays yet"
-            body="Add your family in the Family tab, then start adding their friends."
+            title={t('screen.upcoming.emptyTitle')}
+            body={t('screen.upcoming.emptyBody')}
           />
         </View>
       ) : (
@@ -54,7 +61,7 @@ export default function UpcomingScreen() {
           {sections.map(({ key, items }) => (
             <View key={key} style={styles.section}>
               <Text style={[styles.sectionTitle, { color: colors.textMuted }]}>
-                {SECTION_LABELS[key]}
+                {sectionLabel(key)}
               </Text>
               <View style={{ gap: 10 }}>
                 {items.map((item) => (

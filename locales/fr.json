@@ -1,0 +1,130 @@
+{
+  "nav": {
+    "upcoming": "À venir",
+    "family": "Famille",
+    "friends": "Amis",
+    "settings": "Réglages"
+  },
+  "screen": {
+    "upcoming": {
+      "title": "Birdie",
+      "subtitle": "N'oubliez plus jamais un anniversaire",
+      "emptyTitle": "Aucun anniversaire pour le moment",
+      "emptyBody": "Ajoutez votre famille dans l'onglet Famille, puis ajoutez leurs amis.",
+      "sectionToday": "🎉 Aujourd'hui",
+      "sectionThisWeek": "Cette semaine",
+      "sectionThisMonth": "Ce mois-ci",
+      "sectionLater": "Plus tard"
+    },
+    "family": {
+      "title": "Famille",
+      "emptyTitle": "Ajoutez votre famille",
+      "emptyBody": "Commencez par les personnes de votre foyer — enfants, partenaire, parents.",
+      "addCta": "Ajouter un membre de la famille",
+      "addAccessibility": "Ajouter un membre de la famille",
+      "notFound": "Membre de la famille introuvable."
+    },
+    "friends": {
+      "title": "Amis",
+      "emptyTitle": "Aucun ami pour le moment",
+      "emptyBody": "Ajoutez les amis dont vous voulez vous souvenir — surtout les amis de vos enfants.",
+      "addCta": "Ajouter un ami",
+      "addAccessibility": "Ajouter un ami",
+      "notFound": "Ami introuvable.",
+      "friendOfPrefix": "Ami de {{names}}"
+    },
+    "settings": {
+      "stats": "{{family}} famille · {{friends}} amis",
+      "notificationsHeader": "Notifications",
+      "notificationsBody": "Birdie vous notifie chaque heure pleine de {{start}}h à {{end}}h le jour de l'anniversaire — jusqu'à ce que vous touchiez",
+      "notificationsBodyEmphasis": "J'ai envoyé un message !",
+      "notificationsBodySuffix": "sur l'écran d'anniversaire.",
+      "permissionGranted": "Autorisation : accordée ✓",
+      "permissionDenied": "Autorisation : refusée",
+      "permissionChecking": "Autorisation : vérification…",
+      "enableCta": "Activer les notifications",
+      "resyncCta": "Resynchroniser",
+      "resyncDone": "Notifications resynchronisées.",
+      "exportHeader": "Exporter",
+      "exportBody": "Sauvegardez tous les membres de la famille et les amis. La feuille de partage vous permet d'envoyer le fichier par e-mail, vers Fichiers ou une autre app.",
+      "exportJsonCta": "Exporter en JSON",
+      "exportCsvCta": "Exporter en CSV",
+      "exportShareTitle": "Exporter les données Birdie",
+      "nothingToExport": "Rien à exporter",
+      "nothingToExportBody": "Ajoutez d'abord des membres de la famille ou des amis.",
+      "exportFailedTitle": "Échec de l'exportation",
+      "exportSavedTitle": "Enregistré",
+      "exportSavedBody": "Export écrit dans {{uri}}",
+      "dataHeader": "Données",
+      "dataBody": "Toutes les données restent sur cet appareil (SQLite). Réinstaller l'app les effacera.",
+      "refreshCta": "Actualiser les données",
+      "alertTitle": "Birdie"
+    },
+    "detail": {
+      "notFound": "Personne introuvable.",
+      "todayBanner": "🎂 Anniversaire aujourd'hui !",
+      "nextBirthday": "Prochain anniversaire",
+      "turning": "Aura",
+      "friendOf": "Ami de",
+      "notes": "Notes",
+      "sentCta": "🎉 J'ai envoyé un message !",
+      "sentAcked": "✓ Vous l'avez marqué comme envoyé. Birdie cessera de vous le rappeler.",
+      "undoCta": "Annuler",
+      "closeCta": "Fermer"
+    }
+  },
+  "card": {
+    "tagFamily": "famille",
+    "tagFriend": "ami",
+    "todayLabel": "🎂 Anniversaire aujourd'hui !",
+    "messageSent": "✓ Message envoyé",
+    "turningSuffix": "aura {{age}} ans",
+    "friendOfPrefix": "Ami de {{names}}"
+  },
+  "form": {
+    "nameLabel": "Nom",
+    "namePlaceholder": "p. ex. Max",
+    "birthdayLabel": "Anniversaire (AAAA-MM-JJ)",
+    "birthdayPlaceholder": "2018-08-23",
+    "birthdayHint": "Utilisez 0000 pour l'année si vous ne la connaissez pas (p. ex. 0000-08-23).",
+    "notesLabel": "Notes (facultatif)",
+    "notesPlaceholder": "Adore les dinosaures, allergique aux arachides…",
+    "colorLabel": "Couleur",
+    "assigneesLabel": "Ami de",
+    "assigneesEmpty": "Ajoutez d'abord un membre de la famille pour associer cet ami à quelqu'un.",
+    "colorSwatchA11y": "Sélectionner la couleur {{color}}"
+  },
+  "modal": {
+    "newFamilyTitle": "Nouveau membre de la famille",
+    "editFamilyTitle": "Modifier le membre de la famille",
+    "newFriendTitle": "Nouvel ami",
+    "editFriendTitle": "Modifier l'ami",
+    "saveCta": "Enregistrer",
+    "savingCta": "Enregistrement…",
+    "saveChangesCta": "Enregistrer les modifications",
+    "deleteCta": "Supprimer",
+    "saveErrorTitle": "Impossible d'enregistrer",
+    "deleteFamilyTitle": "Supprimer ce membre ?",
+    "deleteFamilyBody": "{{name}} et toutes les associations d'amis seront supprimés.",
+    "deleteFriendTitle": "Supprimer cet ami ?",
+    "deleteFriendBody": "{{name}} sera supprimé.",
+    "cancelCta": "Annuler",
+    "stackAddFamily": "Ajouter à la famille",
+    "stackEditFamily": "Modifier la famille",
+    "stackAddFriend": "Ajouter un ami",
+    "stackEditFriend": "Modifier un ami",
+    "stackBirthday": "Anniversaire"
+  },
+  "date": {
+    "today": "Aujourd'hui !",
+    "tomorrow": "Demain",
+    "inDays": "Dans {{count}} jours",
+    "nextWeek": "La semaine prochaine",
+    "nextMonth": "Le mois prochain"
+  },
+  "notification": {
+    "title": "🎂 C'est l'anniversaire de {{name}} !",
+    "body": "Touchez quand vous avez envoyé vos vœux — Birdie cessera de vous rappeler.",
+    "channelName": "Rappels d'anniversaire"
+  }
+}
