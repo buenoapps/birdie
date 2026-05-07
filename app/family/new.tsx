@@ -8,6 +8,7 @@ import { PrimaryButton } from '@/components/ui/PrimaryButton';
 import { Brand, Colors } from '@/constants/theme';
 import { useBirdieData } from '@/hooks/use-birdie-data';
 import { useColorScheme } from '@/hooks/use-color-scheme';
+import { t } from '@/lib/i18n';
 
 export default function NewFamilyMember() {
   const router = useRouter();
@@ -27,14 +28,14 @@ export default function NewFamilyMember() {
       await createFamilyMember({ name: values.name, birthday: values.birthday, color });
       router.back();
     } catch (err) {
-      Alert.alert('Could not save', String(err));
+      Alert.alert(t('modal.saveErrorTitle'), String(err));
       setSaving(false);
     }
   };
 
   return (
     <ModalScreen>
-      <Text style={[styles.title, { color: colors.text }]}>New family member</Text>
+      <Text style={[styles.title, { color: colors.text }]}>{t('modal.newFamilyTitle')}</Text>
       <PersonForm
         initial={values}
         onChange={(next, isValid) => {
@@ -43,10 +44,10 @@ export default function NewFamilyMember() {
         }}
       />
       <View style={{ gap: 6 }}>
-        <Text style={[styles.label, { color: colors.textMuted }]}>Color</Text>
+        <Text style={[styles.label, { color: colors.textMuted }]}>{t('form.colorLabel')}</Text>
         <ColorPicker value={color} onChange={setColor} />
       </View>
-      <PrimaryButton title={saving ? 'Saving…' : 'Save'} onPress={onSave} disabled={!valid || saving} />
+      <PrimaryButton title={saving ? t('modal.savingCta') : t('modal.saveCta')} onPress={onSave} disabled={!valid || saving} />
     </ModalScreen>
   );
 }

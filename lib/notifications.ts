@@ -7,6 +7,7 @@ import { friendsRepo } from '@/db/repositories/friends';
 import type { PersonType } from '@/db/types';
 
 import { daysUntil, nextOccurrence } from './dates';
+import { t } from './i18n';
 import {
   DEFAULT_WINDOW,
   NOTIFICATION_ID_PREFIX,
@@ -44,7 +45,7 @@ export async function ensurePermissions(): Promise<boolean> {
 export async function ensureAndroidChannel() {
   if (Platform.OS !== 'android') return;
   await Notifications.setNotificationChannelAsync(ANDROID_CHANNEL, {
-    name: 'Birthday reminders',
+    name: t('notification.channelName'),
     importance: Notifications.AndroidImportance.HIGH,
     sound: 'default',
   });
@@ -84,8 +85,8 @@ async function buildPlannedSchedule(now: Date): Promise<ScheduledItem[]> {
         personId,
         year,
         trigger,
-        title: `🎂 It's ${name}'s birthday!`,
-        body: 'Tap when you\'ve sent your birthday wishes — Birdie will stop nudging.',
+        title: t('notification.title', { name }),
+        body: t('notification.body'),
       });
     }
   };

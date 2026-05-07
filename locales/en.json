@@ -1,0 +1,130 @@
+{
+  "nav": {
+    "upcoming": "Upcoming",
+    "family": "Family",
+    "friends": "Friends",
+    "settings": "Settings"
+  },
+  "screen": {
+    "upcoming": {
+      "title": "Birdie",
+      "subtitle": "Never miss a birthday again",
+      "emptyTitle": "No birthdays yet",
+      "emptyBody": "Add your family in the Family tab, then start adding their friends.",
+      "sectionToday": "🎉 Today",
+      "sectionThisWeek": "This week",
+      "sectionThisMonth": "This month",
+      "sectionLater": "Later"
+    },
+    "family": {
+      "title": "Family",
+      "emptyTitle": "Add your family",
+      "emptyBody": "Start by adding the people in your household — kids, partner, parents.",
+      "addCta": "Add a family member",
+      "addAccessibility": "Add family member",
+      "notFound": "Family member not found."
+    },
+    "friends": {
+      "title": "Friends",
+      "emptyTitle": "No friends yet",
+      "emptyBody": "Add the friends you want to remember — especially your kids' friends.",
+      "addCta": "Add a friend",
+      "addAccessibility": "Add friend",
+      "notFound": "Friend not found.",
+      "friendOfPrefix": "Friend of {{names}}"
+    },
+    "settings": {
+      "stats": "{{family}} family · {{friends}} friends",
+      "notificationsHeader": "Notifications",
+      "notificationsBody": "Birdie pings you every full hour from {{start}}:00 to {{end}}:00 on a birthday — until you tap",
+      "notificationsBodyEmphasis": "I sent a message!",
+      "notificationsBodySuffix": "on the birthday screen.",
+      "permissionGranted": "Permission: granted ✓",
+      "permissionDenied": "Permission: not granted",
+      "permissionChecking": "Permission: checking…",
+      "enableCta": "Enable notifications",
+      "resyncCta": "Re-sync schedule",
+      "resyncDone": "Notifications re-synced.",
+      "exportHeader": "Export",
+      "exportBody": "Save a backup of all family members and friends. The share sheet lets you send the file to email, files, or another app.",
+      "exportJsonCta": "Export as JSON",
+      "exportCsvCta": "Export as CSV",
+      "exportShareTitle": "Export Birdie data",
+      "nothingToExport": "Nothing to export",
+      "nothingToExportBody": "Add some family or friends first.",
+      "exportFailedTitle": "Export failed",
+      "exportSavedTitle": "Saved",
+      "exportSavedBody": "Export written to {{uri}}",
+      "dataHeader": "Data",
+      "dataBody": "All data stays on this device (SQLite). Reinstalling the app will erase it.",
+      "refreshCta": "Refresh data",
+      "alertTitle": "Birdie"
+    },
+    "detail": {
+      "notFound": "Person not found.",
+      "todayBanner": "🎂 Birthday today!",
+      "nextBirthday": "Next birthday",
+      "turning": "Turning",
+      "friendOf": "Friend of",
+      "notes": "Notes",
+      "sentCta": "🎉 I sent a message!",
+      "sentAcked": "✓ You marked this as sent. Birdie will stop reminding you.",
+      "undoCta": "Undo",
+      "closeCta": "Close"
+    }
+  },
+  "card": {
+    "tagFamily": "family",
+    "tagFriend": "friend",
+    "todayLabel": "🎂 Birthday today!",
+    "messageSent": "✓ Message sent",
+    "turningSuffix": "turning {{age}}",
+    "friendOfPrefix": "Friend of {{names}}"
+  },
+  "form": {
+    "nameLabel": "Name",
+    "namePlaceholder": "e.g. Max",
+    "birthdayLabel": "Birthday (YYYY-MM-DD)",
+    "birthdayPlaceholder": "2018-08-23",
+    "birthdayHint": "Use 0000 for the year if you don't know it (e.g. 0000-08-23).",
+    "notesLabel": "Notes (optional)",
+    "notesPlaceholder": "Loves dinosaurs, allergic to peanuts…",
+    "colorLabel": "Color",
+    "assigneesLabel": "Friend of",
+    "assigneesEmpty": "Add a family member first to link this friend to someone.",
+    "colorSwatchA11y": "Select color {{color}}"
+  },
+  "modal": {
+    "newFamilyTitle": "New family member",
+    "editFamilyTitle": "Edit family member",
+    "newFriendTitle": "New friend",
+    "editFriendTitle": "Edit friend",
+    "saveCta": "Save",
+    "savingCta": "Saving…",
+    "saveChangesCta": "Save changes",
+    "deleteCta": "Delete",
+    "saveErrorTitle": "Could not save",
+    "deleteFamilyTitle": "Delete family member?",
+    "deleteFamilyBody": "{{name}} and all friend assignments will be removed.",
+    "deleteFriendTitle": "Delete friend?",
+    "deleteFriendBody": "{{name}} will be removed.",
+    "cancelCta": "Cancel",
+    "stackAddFamily": "Add family",
+    "stackEditFamily": "Edit family",
+    "stackAddFriend": "Add friend",
+    "stackEditFriend": "Edit friend",
+    "stackBirthday": "Birthday"
+  },
+  "date": {
+    "today": "Today!",
+    "tomorrow": "Tomorrow",
+    "inDays": "In {{count}} days",
+    "nextWeek": "Next week",
+    "nextMonth": "Next month"
+  },
+  "notification": {
+    "title": "🎂 It's {{name}}'s birthday!",
+    "body": "Tap when you've sent your birthday wishes — Birdie will stop nudging.",
+    "channelName": "Birthday reminders"
+  }
+}

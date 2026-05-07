@@ -4,6 +4,7 @@ import { Platform, Pressable, StyleSheet, Text, TextInput, View } from 'react-na
 import { Brand, Colors } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { parseBirthday } from '@/lib/dates';
+import { t } from '@/lib/i18n';
 
 export type PersonFormValues = {
   name: string;
@@ -42,27 +43,27 @@ export function PersonForm({ initial, showNotes, onChange }: Props) {
 
   return (
     <View style={styles.container}>
-      <Field label="Name" colors={colors}>
+      <Field label={t('form.nameLabel')} colors={colors}>
         <TextInput
           value={name}
           onChangeText={(v) => {
             setName(v);
             propagate(v, birthday, notes);
           }}
-          placeholder="e.g. Max"
+          placeholder={t('form.namePlaceholder')}
           placeholderTextColor={colors.textMuted}
           style={[styles.input, { color: colors.text, borderColor: colors.border }]}
         />
       </Field>
 
-      <Field label="Birthday (YYYY-MM-DD)" colors={colors}>
+      <Field label={t('form.birthdayLabel')} colors={colors}>
         <TextInput
           value={birthday}
           onChangeText={(v) => {
             setBirthday(v);
             propagate(name, v, notes);
           }}
-          placeholder="2018-08-23"
+          placeholder={t('form.birthdayPlaceholder')}
           placeholderTextColor={colors.textMuted}
           autoCapitalize="none"
           autoCorrect={false}
@@ -70,19 +71,19 @@ export function PersonForm({ initial, showNotes, onChange }: Props) {
           style={[styles.input, { color: colors.text, borderColor: colors.border }]}
         />
         <Text style={[styles.hint, { color: colors.textMuted }]}>
-          Use 0000 for the year if you don&apos;t know it (e.g. 0000-08-23).
+          {t('form.birthdayHint')}
         </Text>
       </Field>
 
       {showNotes && (
-        <Field label="Notes (optional)" colors={colors}>
+        <Field label={t('form.notesLabel')} colors={colors}>
           <TextInput
             value={notes}
             onChangeText={(v) => {
               setNotes(v);
               propagate(name, birthday, v);
             }}
-            placeholder="Loves dinosaurs, allergic to peanuts…"
+            placeholder={t('form.notesPlaceholder')}
             placeholderTextColor={colors.textMuted}
             multiline
             style={[
@@ -136,7 +137,7 @@ export const ColorPicker = ({
           key={color}
           onPress={() => onChange(color)}
           accessibilityRole="button"
-          accessibilityLabel={`Select color ${color}`}
+          accessibilityLabel={t('form.colorSwatchA11y', { color })}
           style={[
             swatchStyles.swatch,
             { backgroundColor: color },

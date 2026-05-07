@@ -11,6 +11,7 @@ import { Colors } from '@/constants/theme';
 import { useBirdieData } from '@/hooks/use-birdie-data';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { buildCsvExport, buildJsonExport, exportFilename } from '@/lib/export';
+import { t } from '@/lib/i18n';
 import {
   ensurePermissions,
   syncBirthdayNotifications,
@@ -31,7 +32,7 @@ export default function SettingsTab() {
 
   const handleResync = async () => {
     await syncBirthdayNotifications();
-    Alert.alert('Birdie', 'Notifications re-synced.');
+    Alert.alert(t('screen.settings.alertTitle'), t('screen.settings.resyncDone'));
   };
 
   const handleRequest = async () => {
@@ -42,7 +43,7 @@ export default function SettingsTab() {
 
   const handleExport = async (format: 'json' | 'csv') => {
     if (family.length === 0 && friends.length === 0) {
-      Alert.alert('Nothing to export', 'Add some family or friends first.');
+      Alert.alert(t('screen.settings.nothingToExport'), t('screen.settings.nothingToExportBody'));
       return;
     }
     try {
@@ -56,16 +57,19 @@ export default function SettingsTab() {
 
       const canShare = await Sharing.isAvailableAsync();
       if (!canShare) {
-        Alert.alert('Saved', `Export written to ${file.uri}`);
+        Alert.alert(
+          t('screen.settings.exportSavedTitle'),
+          t('screen.settings.exportSavedBody', { uri: file.uri })
+        );
         return;
       }
       await Sharing.shareAsync(file.uri, {
         mimeType: format === 'json' ? 'application/json' : 'text/csv',
-        dialogTitle: 'Export Birdie data',
+        dialogTitle: t('screen.settings.exportShareTitle'),
         UTI: format === 'json' ? 'public.json' : 'public.comma-separated-values-text',
       });
     } catch (err) {
-      Alert.alert('Export failed', String(err));
+      Alert.alert(t('screen.settings.exportFailedTitle'), String(err));
     }
   };
 
@@ -74,43 +78,49 @@ export default function SettingsTab() {
       <ScrollView ref={scrollRef} contentContainerStyle={styles.scroll}>
         <View style={styles.heroBox}>
           <Birdie size={120} />
-          <Text style={[styles.title, { color: colors.text }]}>Birdie</Text>
+          <Text style={[styles.title, { color: colors.text }]}>{t('screen.upcoming.title')}</Text>
           <Text style={[styles.subtitle, { color: colors.textMuted }]}>
-            {family.length} family · {friends.length} friends
+            {t('screen.settings.stats', { family: family.length, friends: friends.length })}
           </Text>
         </View>
 
-        <Section title="Notifications" colors={colors}>
+        <Section title={t('screen.settings.notificationsHeader')} colors={colors}>
           <Text style={[styles.body, { color: colors.text }]}>
-            Birdie pings you every full hour from {pad(DEFAULT_WINDOW.startHour)}:00 to{' '}
-            {pad(DEFAULT_WINDOW.endHour)}:00 on a birthday — until you tap{' '}
-            <Text style={{ fontWeight: '700' }}>I sent a message!</Text> on the birthday screen.
+            {t('screen.settings.notificationsBody', {
+              start: pad(DEFAULT_WINDOW.startHour),
+              end: pad(DEFAULT_WINDOW.endHour),
+            })}{' '}
+            <Text style={{ fontWeight: '700' }}>{t('screen.settings.notificationsBodyEmphasis')}</Text>{' '}
+            {t('screen.settings.notificationsBodySuffix')}
           </Text>
           <Text style={[styles.bodySmall, { color: colors.textMuted }]}>
-            Permission: {granted === null ? 'checking…' : granted ? 'granted ✓' : 'not granted'}
+            {granted === null
+              ? t('screen.settings.permissionChecking')
+              : granted
+                ? t('screen.settings.permissionGranted')
+                : t('screen.settings.permissionDenied')}
           </Text>
           {!granted && granted !== null && (
-            <PrimaryButton title="Enable notifications" onPress={handleRequest} />
+            <PrimaryButton title={t('screen.settings.enableCta')} onPress={handleRequest} />
           )}
           {granted && (
-            <PrimaryButton variant="secondary" title="Re-sync schedule" onPress={handleResync} />
+            <PrimaryButton variant="secondary" title={t('screen.settings.resyncCta')} onPress={handleResync} />
           )}
         </Section>
 
-        <Section title="Export" colors={colors}>
+        <Section title={t('screen.settings.exportHeader')} colors={colors}>
           <Text style={[styles.body, { color: colors.text }]}>
-            Save a backup of all family members and friends. The share sheet lets you send the
-            file to email, files, or another app.
+            {t('screen.settings.exportBody')}
           </Text>
-          <PrimaryButton title="Export as JSON" onPress={() => handleExport('json')} />
-          <PrimaryButton variant="secondary" title="Export as CSV" onPress={() => handleExport('csv')} />
+          <PrimaryButton title={t('screen.settings.exportJsonCta')} onPress={() => handleExport('json')} />
+          <PrimaryButton variant="secondary" title={t('screen.settings.exportCsvCta')} onPress={() => handleExport('csv')} />
         </Section>
 
-        <Section title="Data" colors={colors}>
+        <Section title={t('screen.settings.dataHeader')} colors={colors}>
           <Text style={[styles.body, { color: colors.text }]}>
-            All data stays on this device (SQLite). Reinstalling the app will erase it.
+            {t('screen.settings.dataBody')}
           </Text>
-          <PrimaryButton variant="ghost" title="Refresh data" onPress={() => refresh()} />
+          <PrimaryButton variant="ghost" title={t('screen.settings.refreshCta')} onPress={() => refresh()} />
         </Section>
       </ScrollView>
     </SafeAreaView>

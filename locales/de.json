@@ -1,0 +1,130 @@
+{
+  "nav": {
+    "upcoming": "Demnächst",
+    "family": "Familie",
+    "friends": "Freunde",
+    "settings": "Einstellungen"
+  },
+  "screen": {
+    "upcoming": {
+      "title": "Birdie",
+      "subtitle": "Vergiss nie wieder einen Geburtstag",
+      "emptyTitle": "Noch keine Geburtstage",
+      "emptyBody": "Füge im Tab „Familie“ deine Familie hinzu und dann ihre Freunde.",
+      "sectionToday": "🎉 Heute",
+      "sectionThisWeek": "Diese Woche",
+      "sectionThisMonth": "Diesen Monat",
+      "sectionLater": "Später"
+    },
+    "family": {
+      "title": "Familie",
+      "emptyTitle": "Füge deine Familie hinzu",
+      "emptyBody": "Beginne mit den Personen in deinem Haushalt — Kinder, Partner, Eltern.",
+      "addCta": "Familienmitglied hinzufügen",
+      "addAccessibility": "Familienmitglied hinzufügen",
+      "notFound": "Familienmitglied nicht gefunden."
+    },
+    "friends": {
+      "title": "Freunde",
+      "emptyTitle": "Noch keine Freunde",
+      "emptyBody": "Füge die Freunde hinzu, an die du denken möchtest — besonders die Freunde deiner Kinder.",
+      "addCta": "Freund hinzufügen",
+      "addAccessibility": "Freund hinzufügen",
+      "notFound": "Freund nicht gefunden.",
+      "friendOfPrefix": "Freund von {{names}}"
+    },
+    "settings": {
+      "stats": "{{family}} Familie · {{friends}} Freunde",
+      "notificationsHeader": "Benachrichtigungen",
+      "notificationsBody": "Birdie erinnert dich am Geburtstag jede volle Stunde von {{start}}:00 bis {{end}}:00 — bis du auf",
+      "notificationsBodyEmphasis": "Ich habe eine Nachricht geschickt!",
+      "notificationsBodySuffix": "im Geburtstagsfenster tippst.",
+      "permissionGranted": "Berechtigung: erteilt ✓",
+      "permissionDenied": "Berechtigung: nicht erteilt",
+      "permissionChecking": "Berechtigung: wird geprüft…",
+      "enableCta": "Benachrichtigungen aktivieren",
+      "resyncCta": "Zeitplan neu synchronisieren",
+      "resyncDone": "Benachrichtigungen neu synchronisiert.",
+      "exportHeader": "Export",
+      "exportBody": "Erstelle eine Sicherung aller Familienmitglieder und Freunde. Über das Teilen-Menü kannst du die Datei per E-Mail, in Dateien oder in einer anderen App speichern.",
+      "exportJsonCta": "Als JSON exportieren",
+      "exportCsvCta": "Als CSV exportieren",
+      "exportShareTitle": "Birdie-Daten exportieren",
+      "nothingToExport": "Nichts zum Exportieren",
+      "nothingToExportBody": "Füge zuerst Familie oder Freunde hinzu.",
+      "exportFailedTitle": "Export fehlgeschlagen",
+      "exportSavedTitle": "Gespeichert",
+      "exportSavedBody": "Export gespeichert unter {{uri}}",
+      "dataHeader": "Daten",
+      "dataBody": "Alle Daten bleiben auf diesem Gerät (SQLite). Bei einer Neuinstallation der App werden sie gelöscht.",
+      "refreshCta": "Daten aktualisieren",
+      "alertTitle": "Birdie"
+    },
+    "detail": {
+      "notFound": "Person nicht gefunden.",
+      "todayBanner": "🎂 Geburtstag heute!",
+      "nextBirthday": "Nächster Geburtstag",
+      "turning": "Wird",
+      "friendOf": "Freund von",
+      "notes": "Notizen",
+      "sentCta": "🎉 Ich habe eine Nachricht geschickt!",
+      "sentAcked": "✓ Du hast es als gesendet markiert. Birdie hört auf zu erinnern.",
+      "undoCta": "Rückgängig",
+      "closeCta": "Schließen"
+    }
+  },
+  "card": {
+    "tagFamily": "Familie",
+    "tagFriend": "Freund",
+    "todayLabel": "🎂 Geburtstag heute!",
+    "messageSent": "✓ Nachricht gesendet",
+    "turningSuffix": "wird {{age}}",
+    "friendOfPrefix": "Freund von {{names}}"
+  },
+  "form": {
+    "nameLabel": "Name",
+    "namePlaceholder": "z. B. Max",
+    "birthdayLabel": "Geburtstag (JJJJ-MM-TT)",
+    "birthdayPlaceholder": "2018-08-23",
+    "birthdayHint": "Verwende 0000 für das Jahr, wenn du es nicht kennst (z. B. 0000-08-23).",
+    "notesLabel": "Notizen (optional)",
+    "notesPlaceholder": "Liebt Dinos, allergisch gegen Erdnüsse…",
+    "colorLabel": "Farbe",
+    "assigneesLabel": "Freund von",
+    "assigneesEmpty": "Füge zuerst ein Familienmitglied hinzu, um diesen Freund zuzuordnen.",
+    "colorSwatchA11y": "Farbe {{color}} auswählen"
+  },
+  "modal": {
+    "newFamilyTitle": "Neues Familienmitglied",
+    "editFamilyTitle": "Familienmitglied bearbeiten",
+    "newFriendTitle": "Neuer Freund",
+    "editFriendTitle": "Freund bearbeiten",
+    "saveCta": "Speichern",
+    "savingCta": "Speichern…",
+    "saveChangesCta": "Änderungen speichern",
+    "deleteCta": "Löschen",
+    "saveErrorTitle": "Konnte nicht gespeichert werden",
+    "deleteFamilyTitle": "Familienmitglied löschen?",
+    "deleteFamilyBody": "{{name}} und alle Freundeszuordnungen werden entfernt.",
+    "deleteFriendTitle": "Freund löschen?",
+    "deleteFriendBody": "{{name}} wird entfernt.",
+    "cancelCta": "Abbrechen",
+    "stackAddFamily": "Familie hinzufügen",
+    "stackEditFamily": "Familie bearbeiten",
+    "stackAddFriend": "Freund hinzufügen",
+    "stackEditFriend": "Freund bearbeiten",
+    "stackBirthday": "Geburtstag"
+  },
+  "date": {
+    "today": "Heute!",
+    "tomorrow": "Morgen",
+    "inDays": "In {{count}} Tagen",
+    "nextWeek": "Nächste Woche",
+    "nextMonth": "Nächsten Monat"
+  },
+  "notification": {
+    "title": "🎂 {{name}} hat heute Geburtstag!",
+    "body": "Tippe, sobald du deine Glückwünsche gesendet hast — Birdie hört dann auf zu erinnern.",
+    "channelName": "Geburtstagserinnerungen"
+  }
+}

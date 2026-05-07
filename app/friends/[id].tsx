@@ -9,6 +9,7 @@ import { PrimaryButton } from '@/components/ui/PrimaryButton';
 import { Colors } from '@/constants/theme';
 import { useBirdieData } from '@/hooks/use-birdie-data';
 import { useColorScheme } from '@/hooks/use-color-scheme';
+import { t } from '@/lib/i18n';
 
 export default function EditFriend() {
   const router = useRouter();
@@ -31,7 +32,7 @@ export default function EditFriend() {
   if (!friend) {
     return (
       <ModalScreen>
-        <Text style={{ color: colors.text }}>Friend not found.</Text>
+        <Text style={{ color: colors.text }}>{t('screen.friends.notFound')}</Text>
       </ModalScreen>
     );
   }
@@ -48,16 +49,16 @@ export default function EditFriend() {
       });
       router.back();
     } catch (err) {
-      Alert.alert('Could not save', String(err));
+      Alert.alert(t('modal.saveErrorTitle'), String(err));
       setSaving(false);
     }
   };
 
   const onDelete = () => {
-    Alert.alert('Delete friend?', `${friend.name} will be removed.`, [
-      { text: 'Cancel', style: 'cancel' },
+    Alert.alert(t('modal.deleteFriendTitle'), t('modal.deleteFriendBody', { name: friend.name }), [
+      { text: t('modal.cancelCta'), style: 'cancel' },
       {
-        text: 'Delete',
+        text: t('modal.deleteCta'),
         style: 'destructive',
         onPress: async () => {
           await deleteFriend(friend.id);
@@ -69,7 +70,7 @@ export default function EditFriend() {
 
   return (
     <ModalScreen>
-      <Text style={[styles.title, { color: colors.text }]}>Edit friend</Text>
+      <Text style={[styles.title, { color: colors.text }]}>{t('modal.editFriendTitle')}</Text>
       <PersonForm
         initial={values}
         showNotes
@@ -79,8 +80,8 @@ export default function EditFriend() {
         }}
       />
       <AssigneePicker members={family} selectedIds={assigneeIds} onChange={setAssigneeIds} />
-      <PrimaryButton title={saving ? 'Saving…' : 'Save changes'} onPress={onSave} disabled={!valid || saving} />
-      <PrimaryButton variant="ghost" title="Delete" onPress={onDelete} />
+      <PrimaryButton title={saving ? t('modal.savingCta') : t('modal.saveChangesCta')} onPress={onSave} disabled={!valid || saving} />
+      <PrimaryButton variant="ghost" title={t('modal.deleteCta')} onPress={onDelete} />
     </ModalScreen>
   );
 }

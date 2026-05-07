@@ -9,6 +9,7 @@ import { PrimaryButton } from '@/components/ui/PrimaryButton';
 import { Colors } from '@/constants/theme';
 import { useBirdieData } from '@/hooks/use-birdie-data';
 import { useColorScheme } from '@/hooks/use-color-scheme';
+import { t } from '@/lib/i18n';
 
 export default function NewFriend() {
   const router = useRouter();
@@ -33,14 +34,14 @@ export default function NewFriend() {
       });
       router.back();
     } catch (err) {
-      Alert.alert('Could not save', String(err));
+      Alert.alert(t('modal.saveErrorTitle'), String(err));
       setSaving(false);
     }
   };
 
   return (
     <ModalScreen>
-      <Text style={[styles.title, { color: colors.text }]}>New friend</Text>
+      <Text style={[styles.title, { color: colors.text }]}>{t('modal.newFriendTitle')}</Text>
       <PersonForm
         initial={values}
         showNotes
@@ -50,7 +51,7 @@ export default function NewFriend() {
         }}
       />
       <AssigneePicker members={family} selectedIds={assigneeIds} onChange={setAssigneeIds} />
-      <PrimaryButton title={saving ? 'Saving…' : 'Save'} onPress={onSave} disabled={!valid || saving} />
+      <PrimaryButton title={saving ? t('modal.savingCta') : t('modal.saveCta')} onPress={onSave} disabled={!valid || saving} />
     </ModalScreen>
   );
 }

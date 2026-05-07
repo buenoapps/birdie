@@ -11,6 +11,7 @@ import { Brand, Colors } from '@/constants/theme';
 import { useBirdieData } from '@/hooks/use-birdie-data';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { ageOnNextBirthday, daysUntil, formatRelativeDays } from '@/lib/dates';
+import { t } from '@/lib/i18n';
 
 export default function FamilyTab() {
   const router = useRouter();
@@ -23,11 +24,11 @@ export default function FamilyTab() {
   return (
     <SafeAreaView edges={['top']} style={[styles.safe, { backgroundColor: colors.background }]}>
       <View style={styles.header}>
-        <Text style={[styles.title, { color: colors.text }]}>Family</Text>
+        <Text style={[styles.title, { color: colors.text }]}>{t('screen.family.title')}</Text>
         <Pressable
           onPress={() => router.push('/family/new' as never)}
           accessibilityRole="button"
-          accessibilityLabel="Add family member"
+          accessibilityLabel={t('screen.family.addAccessibility')}
           style={[styles.fab, { backgroundColor: Brand.partyPink }]}
         >
           <IconSymbol name="plus" size={22} color="#FFFFFF" />
@@ -37,11 +38,11 @@ export default function FamilyTab() {
       {family.length === 0 ? (
         <View style={styles.empty}>
           <EmptyState
-            title="Add your family"
-            body="Start by adding the people in your household — kids, partner, parents."
+            title={t('screen.family.emptyTitle')}
+            body={t('screen.family.emptyBody')}
           />
           <View style={{ alignItems: 'center', marginTop: 8 }}>
-            <PrimaryButton title="Add a family member" onPress={() => router.push('/family/new' as never)} />
+            <PrimaryButton title={t('screen.family.addCta')} onPress={() => router.push('/family/new' as never)} />
           </View>
         </View>
       ) : (
@@ -63,7 +64,7 @@ export default function FamilyTab() {
                   <Text style={[styles.rowName, { color: colors.text }]}>{member.name}</Text>
                   <Text style={[styles.rowSub, { color: colors.textMuted }]}>
                     {formatRelativeDays(days)}
-                    {age !== null ? ` · turning ${age}` : ''}
+                    {age !== null ? ` · ${t('card.turningSuffix', { age })}` : ''}
                   </Text>
                 </View>
                 <IconSymbol name="chevron.right" size={18} color={colors.icon as string} />
