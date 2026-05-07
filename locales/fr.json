@@ -55,6 +55,11 @@
       "exportFailedTitle": "Échec de l'exportation",
       "exportSavedTitle": "Enregistré",
       "exportSavedBody": "Export écrit dans {{uri}}",
+      "importHeader": "Importer",
+      "importBody": "Récupérez votre famille et vos amis depuis un export JSON ou CSV Birdie. Un aperçu s'affiche avant tout enregistrement.",
+      "importFileCta": "Importer depuis un fichier",
+      "importTextCta": "Importer depuis du texte",
+      "importErrorTitle": "Impossible d'importer",
       "dataHeader": "Données",
       "dataBody": "Toutes les données restent sur cet appareil (SQLite). Réinstaller l'app les effacera.",
       "refreshCta": "Actualiser les données",
@@ -71,6 +76,27 @@
       "sentAcked": "✓ Vous l'avez marqué comme envoyé. Birdie cessera de vous le rappeler.",
       "undoCta": "Annuler",
       "closeCta": "Fermer"
+    },
+    "import": {
+      "text": {
+        "title": "Coller les données à importer",
+        "placeholder": "Collez du JSON ou du CSV ici…",
+        "hint": "Collez un export JSON ou CSV Birdie. L'app affichera un aperçu avant l'import.",
+        "submitCta": "Continuer"
+      },
+      "review": {
+        "title": "Vérifier l'import",
+        "subtitleParsed": "{{count}} éléments détectés",
+        "subtitleIgnored": "{{count}} lignes ignorées",
+        "familyHeader": "Famille",
+        "friendsHeader": "Amis",
+        "noItems": "Rien à importer.",
+        "alreadyExists": "Déjà dans Birdie",
+        "importCta": "Importer {{count}} éléments",
+        "successTitle": "Importé",
+        "successBody": "{{count}} éléments ajoutés à Birdie.",
+        "closeCta": "Fermer"
+      }
     }
   },
   "card": {
@@ -113,7 +139,9 @@
     "stackEditFamily": "Modifier la famille",
     "stackAddFriend": "Ajouter un ami",
     "stackEditFriend": "Modifier un ami",
-    "stackBirthday": "Anniversaire"
+    "stackBirthday": "Anniversaire",
+    "stackImportText": "Coller un import",
+    "stackImportReview": "Vérifier l'import"
   },
   "date": {
     "today": "Aujourd'hui !",

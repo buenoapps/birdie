@@ -55,6 +55,11 @@
       "exportFailedTitle": "Export failed",
       "exportSavedTitle": "Saved",
       "exportSavedBody": "Export written to {{uri}}",
+      "importHeader": "Import",
+      "importBody": "Bring family and friends back from a Birdie JSON or CSV export. You'll see a preview before anything is saved.",
+      "importFileCta": "Import from file",
+      "importTextCta": "Import from text",
+      "importErrorTitle": "Could not import",
       "dataHeader": "Data",
       "dataBody": "All data stays on this device (SQLite). Reinstalling the app will erase it.",
       "refreshCta": "Refresh data",
@@ -71,6 +76,27 @@
       "sentAcked": "✓ You marked this as sent. Birdie will stop reminding you.",
       "undoCta": "Undo",
       "closeCta": "Close"
+    },
+    "import": {
+      "text": {
+        "title": "Paste import data",
+        "placeholder": "Paste JSON or CSV here…",
+        "hint": "Paste a Birdie JSON or CSV export. The app will show a preview before importing anything.",
+        "submitCta": "Continue"
+      },
+      "review": {
+        "title": "Review import",
+        "subtitleParsed": "{{count}} items parsed",
+        "subtitleIgnored": "{{count}} rows skipped as malformed",
+        "familyHeader": "Family",
+        "friendsHeader": "Friends",
+        "noItems": "Nothing to import.",
+        "alreadyExists": "Already in Birdie",
+        "importCta": "Import {{count}} items",
+        "successTitle": "Imported",
+        "successBody": "{{count}} items added to Birdie.",
+        "closeCta": "Close"
+      }
     }
   },
   "card": {
@@ -113,7 +139,9 @@
     "stackEditFamily": "Edit family",
     "stackAddFriend": "Add friend",
     "stackEditFriend": "Edit friend",
-    "stackBirthday": "Birthday"
+    "stackBirthday": "Birthday",
+    "stackImportText": "Paste import",
+    "stackImportReview": "Review import"
   },
   "date": {
     "today": "Today!",

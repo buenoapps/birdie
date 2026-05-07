@@ -55,6 +55,11 @@
       "exportFailedTitle": "La exportación ha fallado",
       "exportSavedTitle": "Guardado",
       "exportSavedBody": "Exportación escrita en {{uri}}",
+      "importHeader": "Importar",
+      "importBody": "Recupera familiares y amigos desde una exportación JSON o CSV de Birdie. Verás una vista previa antes de guardar nada.",
+      "importFileCta": "Importar desde archivo",
+      "importTextCta": "Importar desde texto",
+      "importErrorTitle": "No se ha podido importar",
       "dataHeader": "Datos",
       "dataBody": "Todos los datos permanecen en este dispositivo (SQLite). Reinstalar la app los borrará.",
       "refreshCta": "Actualizar datos",
@@ -71,6 +76,27 @@
       "sentAcked": "✓ Lo has marcado como enviado. Birdie dejará de recordártelo.",
       "undoCta": "Deshacer",
       "closeCta": "Cerrar"
+    },
+    "import": {
+      "text": {
+        "title": "Pegar datos de importación",
+        "placeholder": "Pega aquí JSON o CSV…",
+        "hint": "Pega una exportación JSON o CSV de Birdie. La app mostrará una vista previa antes de importar.",
+        "submitCta": "Continuar"
+      },
+      "review": {
+        "title": "Revisar importación",
+        "subtitleParsed": "{{count}} elementos detectados",
+        "subtitleIgnored": "{{count}} filas omitidas por errores",
+        "familyHeader": "Familia",
+        "friendsHeader": "Amigos",
+        "noItems": "Nada que importar.",
+        "alreadyExists": "Ya está en Birdie",
+        "importCta": "Importar {{count}} elementos",
+        "successTitle": "Importado",
+        "successBody": "Se han añadido {{count}} elementos a Birdie.",
+        "closeCta": "Cerrar"
+      }
     }
   },
   "card": {
@@ -113,7 +139,9 @@
     "stackEditFamily": "Editar familia",
     "stackAddFriend": "Añadir amigo",
     "stackEditFriend": "Editar amigo",
-    "stackBirthday": "Cumpleaños"
+    "stackBirthday": "Cumpleaños",
+    "stackImportText": "Pegar importación",
+    "stackImportReview": "Revisar importación"
   },
   "date": {
     "today": "¡Hoy!",

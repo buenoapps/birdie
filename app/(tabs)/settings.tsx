@@ -1,5 +1,7 @@
 import { useScrollToTop } from '@react-navigation/native';
+import * as DocumentPicker from 'expo-document-picker';
 import { File, Paths } from 'expo-file-system';
+import { useRouter } from 'expo-router';
 import * as Sharing from 'expo-sharing';
 import { useEffect, useRef, useState } from 'react';
 import { Alert, ScrollView, StyleSheet, Text, View } from 'react-native';
@@ -12,6 +14,7 @@ import { useBirdieData } from '@/hooks/use-birdie-data';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { buildCsvExport, buildJsonExport, exportFilename } from '@/lib/export';
 import { t } from '@/lib/i18n';
+import { annotateDuplicates, parse, setStagedImport } from '@/lib/import';
 import {
   ensurePermissions,
   syncBirthdayNotifications,
@@ -19,6 +22,7 @@ import {
 import { DEFAULT_WINDOW } from '@/lib/scheduler';
 
 export default function SettingsTab() {
+  const router = useRouter();
   const scheme = useColorScheme() ?? 'light';
   const colors = Colors[scheme];
   const { family, friends, refresh } = useBirdieData();
@@ -73,6 +77,25 @@ export default function SettingsTab() {
     }
   };
 
+  const handleImportFromFile = async () => {
+    try {
+      const result = await DocumentPicker.getDocumentAsync({
+        type: ['application/json', 'text/csv', 'text/comma-separated-values', 'text/plain'],
+        copyToCacheDirectory: true,
+      });
+      if (result.canceled) return;
+      const asset = result.assets[0];
+      if (!asset) return;
+      const file = new File(asset.uri);
+      const content = await file.text();
+      const parsed = parse(content);
+      setStagedImport(annotateDuplicates(parsed, family, friends));
+      router.push('/import/review' as never);
+    } catch (err) {
+      Alert.alert(t('screen.settings.importErrorTitle'), String(err));
+    }
+  };
+
   return (
     <SafeAreaView edges={['top']} style={[styles.safe, { backgroundColor: colors.background }]}>
       <ScrollView ref={scrollRef} contentContainerStyle={styles.scroll}>
@@ -114,6 +137,18 @@ export default function SettingsTab() {
           </Text>
           <PrimaryButton title={t('screen.settings.exportJsonCta')} onPress={() => handleExport('json')} />
           <PrimaryButton variant="secondary" title={t('screen.settings.exportCsvCta')} onPress={() => handleExport('csv')} />
+        </Section>
+
+        <Section title={t('screen.settings.importHeader')} colors={colors}>
+          <Text style={[styles.body, { color: colors.text }]}>
+            {t('screen.settings.importBody')}
+          </Text>
+          <PrimaryButton title={t('screen.settings.importFileCta')} onPress={handleImportFromFile} />
+          <PrimaryButton
+            variant="secondary"
+            title={t('screen.settings.importTextCta')}
+            onPress={() => router.push('/import/text' as never)}
+          />
         </Section>
 
         <Section title={t('screen.settings.dataHeader')} colors={colors}>
