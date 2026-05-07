@@ -54,6 +54,7 @@ export default function RootLayout() {
         | { personType?: string; personId?: number }
         | undefined;
       if (data?.personType && typeof data.personId === 'number') {
+        router.navigate('/');
         router.push(`/birthday/${data.personType}/${data.personId}` as never);
       }
     });
