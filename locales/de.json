@@ -55,6 +55,11 @@
       "exportFailedTitle": "Export fehlgeschlagen",
       "exportSavedTitle": "Gespeichert",
       "exportSavedBody": "Export gespeichert unter {{uri}}",
+      "importHeader": "Import",
+      "importBody": "Hole Familie und Freunde aus einem Birdie-JSON- oder -CSV-Export zurück. Du siehst eine Vorschau, bevor etwas gespeichert wird.",
+      "importFileCta": "Aus Datei importieren",
+      "importTextCta": "Aus Text importieren",
+      "importErrorTitle": "Import fehlgeschlagen",
       "dataHeader": "Daten",
       "dataBody": "Alle Daten bleiben auf diesem Gerät (SQLite). Bei einer Neuinstallation der App werden sie gelöscht.",
       "refreshCta": "Daten aktualisieren",
@@ -71,6 +76,27 @@
       "sentAcked": "✓ Du hast es als gesendet markiert. Birdie hört auf zu erinnern.",
       "undoCta": "Rückgängig",
       "closeCta": "Schließen"
+    },
+    "import": {
+      "text": {
+        "title": "Importdaten einfügen",
+        "placeholder": "JSON oder CSV hier einfügen…",
+        "hint": "Füge einen Birdie-JSON- oder -CSV-Export ein. Die App zeigt eine Vorschau, bevor etwas importiert wird.",
+        "submitCta": "Weiter"
+      },
+      "review": {
+        "title": "Import prüfen",
+        "subtitleParsed": "{{count}} Einträge gefunden",
+        "subtitleIgnored": "{{count}} Zeilen wegen Fehlern übersprungen",
+        "familyHeader": "Familie",
+        "friendsHeader": "Freunde",
+        "noItems": "Nichts zu importieren.",
+        "alreadyExists": "Bereits in Birdie",
+        "importCta": "{{count}} Einträge importieren",
+        "successTitle": "Importiert",
+        "successBody": "{{count}} Einträge zu Birdie hinzugefügt.",
+        "closeCta": "Schließen"
+      }
     }
   },
   "card": {
@@ -113,7 +139,9 @@
     "stackEditFamily": "Familie bearbeiten",
     "stackAddFriend": "Freund hinzufügen",
     "stackEditFriend": "Freund bearbeiten",
-    "stackBirthday": "Geburtstag"
+    "stackBirthday": "Geburtstag",
+    "stackImportText": "Import einfügen",
+    "stackImportReview": "Import prüfen"
   },
   "date": {
     "today": "Heute!",

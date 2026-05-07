@@ -75,6 +75,14 @@ export default function RootLayout() {
             name="birthday/[type]/[id]"
             options={{ presentation: 'modal', title: t('modal.stackBirthday') }}
           />
+          <Stack.Screen
+            name="import/text"
+            options={{ presentation: 'modal', title: t('modal.stackImportText') }}
+          />
+          <Stack.Screen
+            name="import/review"
+            options={{ presentation: 'modal', title: t('modal.stackImportReview') }}
+          />
         </Stack>
         <StatusBar style="auto" />
       </ThemeProvider>

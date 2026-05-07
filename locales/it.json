@@ -55,6 +55,11 @@
       "exportFailedTitle": "Esportazione non riuscita",
       "exportSavedTitle": "Salvato",
       "exportSavedBody": "Esportazione salvata in {{uri}}",
+      "importHeader": "Importa",
+      "importBody": "Recupera familiari e amici da un'esportazione JSON o CSV di Birdie. Vedrai un'anteprima prima che venga salvato qualcosa.",
+      "importFileCta": "Importa da file",
+      "importTextCta": "Importa da testo",
+      "importErrorTitle": "Importazione non riuscita",
       "dataHeader": "Dati",
       "dataBody": "Tutti i dati restano su questo dispositivo (SQLite). Reinstallando l'app verranno cancellati.",
       "refreshCta": "Aggiorna dati",
@@ -71,6 +76,27 @@
       "sentAcked": "✓ L'hai segnato come inviato. Birdie smetterà di ricordartelo.",
       "undoCta": "Annulla",
       "closeCta": "Chiudi"
+    },
+    "import": {
+      "text": {
+        "title": "Incolla i dati da importare",
+        "placeholder": "Incolla qui JSON o CSV…",
+        "hint": "Incolla un'esportazione JSON o CSV di Birdie. L'app mostrerà un'anteprima prima di importare.",
+        "submitCta": "Continua"
+      },
+      "review": {
+        "title": "Verifica importazione",
+        "subtitleParsed": "{{count}} elementi rilevati",
+        "subtitleIgnored": "{{count}} righe ignorate",
+        "familyHeader": "Famiglia",
+        "friendsHeader": "Amici",
+        "noItems": "Niente da importare.",
+        "alreadyExists": "Già in Birdie",
+        "importCta": "Importa {{count}} elementi",
+        "successTitle": "Importato",
+        "successBody": "{{count}} elementi aggiunti a Birdie.",
+        "closeCta": "Chiudi"
+      }
     }
   },
   "card": {
@@ -113,7 +139,9 @@
     "stackEditFamily": "Modifica famiglia",
     "stackAddFriend": "Aggiungi amico",
     "stackEditFriend": "Modifica amico",
-    "stackBirthday": "Compleanno"
+    "stackBirthday": "Compleanno",
+    "stackImportText": "Incolla import",
+    "stackImportReview": "Verifica import"
   },
   "date": {
     "today": "Oggi!",
