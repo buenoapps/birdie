@@ -1,7 +1,6 @@
-import { useScrollToTop } from '@react-navigation/native';
 import * as DocumentPicker from 'expo-document-picker';
 import { File, Paths } from 'expo-file-system';
-import { useRouter } from 'expo-router';
+import { useRouter, useScrollToTop } from 'expo-router';
 import * as Sharing from 'expo-sharing';
 import { useEffect, useRef, useState } from 'react';
 import { Alert, ScrollView, StyleSheet, Text, View } from 'react-native';

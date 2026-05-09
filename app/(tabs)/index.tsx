@@ -1,5 +1,4 @@
-import { useScrollToTop } from '@react-navigation/native';
-import { useRouter } from 'expo-router';
+import { useRouter, useScrollToTop } from 'expo-router';
 import { useMemo, useRef } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
