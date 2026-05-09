@@ -87,5 +87,94 @@
         ]
       }
     }
+  },
+  "googlePlay": {
+    "categoryType": "APPLICATION",
+    "category": "LIFESTYLE",
+    "contentRating": "EVERYONE",
+    "info": {
+      "en-US": {
+        "title": "Birdie",
+        "shortDescription": "Birthday tracker for family and friends — local-first, no account needed.",
+        "fullDescription": "Birdie is a playful, local-first birthday tracker for families and the friends in your kids' lives.\n\nAdd your family — kids, partner, parents — with each person's birthday. Then add the friends you want to remember and link each one to one or more family members (\"Tim is a friend of Max\"). Birdie keeps everyone organised so you never lose track of whose birthday is coming up.\n\nKEY FEATURES\n• Upcoming list grouped by Today, This Week, This Month, and Later\n• Hourly notifications on the day from 8am to 9pm — until you tap \"I sent a message!\"\n• Friend ↔ family-member linking with a chip picker\n• CSV and JSON export of every birthday\n• Import from a Birdie file or pasted text — duplicate-aware preview before anything is saved\n• Light and dark mode\n• Available in English, German, Spanish, French, and Italian — auto-detected from your device language\n\nPRIVACY-FIRST\nEverything stays on your device. No account, no cloud, no analytics. Your birthdays are yours.\n\nBirdie is the chubby yellow bird in the pink party hat. He'll happily nudge you on the day, then quietly disappear once you've sent your wishes.",
+        "keywords": [
+          "birthday",
+          "birthday tracker",
+          "family",
+          "friends",
+          "reminder",
+          "calendar",
+          "kids",
+          "party",
+          "celebration",
+          "gift"
+        ]
+      },
+      "de-DE": {
+        "title": "Birdie",
+        "shortDescription": "Geburtstagsplaner für Familie und Freunde — lokal, ohne Konto.",
+        "fullDescription": "Birdie ist ein verspielter Geburtstagsplaner für Familien und die Freunde im Leben deiner Kinder — alles auf deinem Gerät.\n\nFüge deine Familie hinzu — Kinder, Partner, Eltern — jeweils mit Geburtstag. Trage dann die Freunde ein, an die du denken möchtest, und verknüpfe jeden mit einem oder mehreren Familienmitgliedern („Tim ist ein Freund von Max“). So weißt du immer, wessen Geburtstag als Nächstes ansteht.\n\nFUNKTIONEN\n• Anstehende Geburtstage gruppiert nach Heute, Diese Woche, Diesen Monat und Später\n• Stündliche Benachrichtigungen am Geburtstag von 8 bis 21 Uhr — bis du auf „Ich habe eine Nachricht geschickt!“ tippst\n• Freund-Familie-Verknüpfung über eine einfache Chip-Auswahl\n• Export aller Geburtstage als CSV oder JSON\n• Import aus Birdie-Dateien oder eingefügtem Text — mit Duplikat-Erkennung in der Vorschau\n• Hell- und Dunkel-Modus\n• Verfügbar auf Deutsch, Englisch, Spanisch, Französisch und Italienisch — automatisch erkannt aus deiner Gerätesprache\n\nDATENSCHUTZ ZUERST\nAlles bleibt auf deinem Gerät. Kein Konto, keine Cloud, keine Analytics. Deine Geburtstage gehören dir.\n\nBirdie ist der pummelige gelbe Vogel mit dem rosa Partyhut. Er erinnert dich freundlich am Geburtstag — und hört auf, sobald du deine Glückwünsche verschickt hast.",
+        "keywords": [
+          "geburtstag",
+          "geburtstage",
+          "erinnerung",
+          "familie",
+          "freunde",
+          "kinder",
+          "kalender",
+          "planer",
+          "feiern",
+          "geschenk"
+        ]
+      },
+      "es-ES": {
+        "title": "Birdie",
+        "shortDescription": "Recordatorio de cumpleaños para familia y amigos. Local, sin cuenta.",
+        "fullDescription": "Birdie es un planificador de cumpleaños alegre y local-first para familias y los amigos que rodean a tus hijos.\n\nAñade a tu familia — hijos, pareja, padres — cada uno con su cumpleaños. Luego añade a los amigos que quieras recordar y enlaza a cada uno con uno o varios familiares (\"Tim es amigo de Max\"). Así siempre sabrás de quién es el próximo cumpleaños.\n\nFUNCIONES\n• Lista de próximos cumpleaños agrupada por Hoy, Esta semana, Este mes y Más adelante\n• Notificaciones cada hora el día del cumpleaños de 8:00 a 21:00 — hasta que toques \"¡He enviado un mensaje!\"\n• Vinculación amigo-familiar con un selector de chips\n• Exportación de todos los cumpleaños en CSV o JSON\n• Importación desde un archivo Birdie o texto pegado — con detección de duplicados en la vista previa\n• Modo claro y oscuro\n• Disponible en español, inglés, alemán, francés e italiano — detectado automáticamente del idioma del dispositivo\n\nLA PRIVACIDAD ANTE TODO\nTodo se queda en tu dispositivo. Sin cuenta, sin nube, sin análisis. Tus cumpleaños son tuyos.\n\nBirdie es el pájaro amarillo regordete con el gorro rosa de fiesta. Te avisa amablemente el día del cumpleaños y se calla en cuanto has enviado tus felicitaciones.",
+        "keywords": [
+          "cumpleaños",
+          "recordatorio",
+          "familia",
+          "amigos",
+          "niños",
+          "calendario",
+          "fiesta",
+          "regalo",
+          "planificador"
+        ]
+      },
+      "fr-FR": {
+        "title": "Birdie",
+        "shortDescription": "Anniversaires de la famille et des amis — 100 % local, sans compte.",
+        "fullDescription": "Birdie est un planificateur d'anniversaires ludique et 100 % local pour la famille et les amis qui entourent vos enfants.\n\nAjoutez votre famille — enfants, conjoint, parents — chacun avec son anniversaire. Ajoutez ensuite les amis dont vous voulez vous souvenir et reliez chacun à un ou plusieurs membres de la famille (« Tim est un ami de Max »). Vous saurez toujours quel est le prochain anniversaire.\n\nFONCTIONNALITÉS\n• Liste des anniversaires à venir, regroupée par Aujourd'hui, Cette semaine, Ce mois-ci et Plus tard\n• Notifications toutes les heures pleines de 8 h à 21 h le jour J — jusqu'à ce que vous touchiez « J'ai envoyé un message ! »\n• Liaison ami-membre de la famille via un sélecteur en pastilles\n• Export de tous les anniversaires en CSV ou JSON\n• Import depuis un fichier Birdie ou un texte collé — avec détection des doublons en aperçu\n• Mode clair et sombre\n• Disponible en français, anglais, allemand, espagnol et italien — détecté automatiquement à partir de la langue de l'appareil\n\nCONFIDENTIALITÉ AVANT TOUT\nTout reste sur votre appareil. Pas de compte, pas de cloud, pas de tracking. Vos anniversaires vous appartiennent.\n\nBirdie, c'est le petit oiseau jaune dodu au chapeau rose. Il vous donnera un coup de coude le jour J, puis se taira sagement dès que vos vœux seront envoyés.",
+        "keywords": [
+          "anniversaire",
+          "rappel",
+          "famille",
+          "amis",
+          "enfants",
+          "calendrier",
+          "fête",
+          "cadeau",
+          "planificateur"
+        ]
+      },
+      "it-IT": {
+        "title": "Birdie",
+        "shortDescription": "Promemoria compleanni per famiglia e amici — locale, senza account.",
+        "fullDescription": "Birdie è un planner di compleanni allegro e local-first per le famiglie e gli amici che circondano i tuoi figli.\n\nAggiungi la tua famiglia — figli, partner, genitori — ognuno con il suo compleanno. Poi aggiungi gli amici da ricordare e collega ciascuno a uno o più familiari (\"Tim è amico di Max\"). Saprai sempre di chi è il prossimo compleanno.\n\nFUNZIONI\n• Elenco dei prossimi compleanni raggruppato per Oggi, Questa settimana, Questo mese e Più avanti\n• Notifiche ogni ora dalle 8:00 alle 21:00 il giorno del compleanno — finché non tocchi \"Ho inviato un messaggio!\"\n• Collegamento amico-familiare tramite selettore a chip\n• Esportazione di tutti i compleanni in CSV o JSON\n• Importazione da un file Birdie o testo incollato — con anteprima e rilevamento dei duplicati\n• Modalità chiara e scura\n• Disponibile in italiano, inglese, tedesco, spagnolo e francese — rilevata automaticamente dalla lingua del dispositivo\n\nPRIMA LA PRIVACY\nTutto resta sul tuo dispositivo. Nessun account, nessun cloud, nessun tracking. I tuoi compleanni sono tuoi.\n\nBirdie è l'uccellino giallo paffuto con il cappellino rosa da festa. Ti dà una gentile spintarella il giorno del compleanno e tace non appena hai inviato i tuoi auguri.",
+        "keywords": [
+          "compleanno",
+          "promemoria",
+          "famiglia",
+          "amici",
+          "bambini",
+          "calendario",
+          "festa",
+          "regalo",
+          "pianificatore"
+        ]
+      }
+    }
   }
 }
