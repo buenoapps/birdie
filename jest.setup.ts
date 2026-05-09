@@ -40,6 +40,24 @@ jest.mock('expo-sharing', () => ({
   shareAsync: jest.fn().mockResolvedValue(undefined),
 }));
 
+jest.mock('@expo/ui/swift-ui', () => {
+  const React = require('react');
+  const Tab = ({ children }: any) => React.createElement(React.Fragment, null, children);
+  const TabView = Object.assign(
+    ({ children }: any) => React.createElement(React.Fragment, null, children),
+    { Tab }
+  );
+  return {
+    Host: ({ children }: any) => React.createElement(React.Fragment, null, children),
+    TabView,
+  };
+});
+
+jest.mock('@expo/ui/swift-ui/modifiers', () => ({
+  frame: () => ({}),
+  tabViewStyle: () => ({}),
+}));
+
 jest.mock('expo-router', () => ({
   router: { push: jest.fn(), back: jest.fn(), replace: jest.fn() },
   useRouter: () => ({ push: jest.fn(), back: jest.fn(), replace: jest.fn() }),

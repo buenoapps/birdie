@@ -2,11 +2,12 @@ import * as Notifications from 'expo-notifications';
 import { DarkTheme, DefaultTheme, Stack, ThemeProvider, router } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
-import { AppState } from 'react-native';
+import { AppState, Platform } from 'react-native';
 import 'react-native-reanimated';
 
 import { BirdieDataProvider } from '@/hooks/use-birdie-data';
 import { useColorScheme } from '@/hooks/use-color-scheme';
+import { TabSelectionProvider, useTabSelection } from '@/hooks/use-tab-selection';
 import { t } from '@/lib/i18n';
 import {
   ensurePermissions,
@@ -21,7 +22,18 @@ export const unstable_settings = {
 installNotificationHandler();
 
 export default function RootLayout() {
+  return (
+    <TabSelectionProvider>
+      <BirdieDataProvider>
+        <RootLayoutInner />
+      </BirdieDataProvider>
+    </TabSelectionProvider>
+  );
+}
+
+function RootLayoutInner() {
   const colorScheme = useColorScheme();
+  const { setActiveTab } = useTabSelection();
 
   useEffect(() => {
     let cancelled = false;
@@ -54,37 +66,39 @@ export default function RootLayout() {
         | { personType?: string; personId?: number }
         | undefined;
       if (data?.personType && typeof data.personId === 'number') {
-        router.navigate('/');
+        if (Platform.OS === 'ios') {
+          setActiveTab('upcoming');
+        } else {
+          router.navigate('/');
+        }
         router.push(`/birthday/${data.personType}/${data.personId}` as never);
       }
     });
     return () => sub.remove();
-  }, []);
+  }, [setActiveTab]);
 
   return (
-    <BirdieDataProvider>
-      <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-        <Stack>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="family/new" options={{ presentation: 'modal', title: t('modal.stackAddFamily') }} />
-          <Stack.Screen name="family/[id]" options={{ presentation: 'modal', title: t('modal.stackEditFamily') }} />
-          <Stack.Screen name="friends/new" options={{ presentation: 'modal', title: t('modal.stackAddFriend') }} />
-          <Stack.Screen name="friends/[id]" options={{ presentation: 'modal', title: t('modal.stackEditFriend') }} />
-          <Stack.Screen
-            name="birthday/[type]/[id]"
-            options={{ presentation: 'modal', title: t('modal.stackBirthday') }}
-          />
-          <Stack.Screen
-            name="import/text"
-            options={{ presentation: 'modal', title: t('modal.stackImportText') }}
-          />
-          <Stack.Screen
-            name="import/review"
-            options={{ presentation: 'modal', title: t('modal.stackImportReview') }}
-          />
-        </Stack>
-        <StatusBar style="auto" />
-      </ThemeProvider>
-    </BirdieDataProvider>
+    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+      <Stack>
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen name="family/new" options={{ presentation: 'modal', title: t('modal.stackAddFamily') }} />
+        <Stack.Screen name="family/[id]" options={{ presentation: 'modal', title: t('modal.stackEditFamily') }} />
+        <Stack.Screen name="friends/new" options={{ presentation: 'modal', title: t('modal.stackAddFriend') }} />
+        <Stack.Screen name="friends/[id]" options={{ presentation: 'modal', title: t('modal.stackEditFriend') }} />
+        <Stack.Screen
+          name="birthday/[type]/[id]"
+          options={{ presentation: 'modal', title: t('modal.stackBirthday') }}
+        />
+        <Stack.Screen
+          name="import/text"
+          options={{ presentation: 'modal', title: t('modal.stackImportText') }}
+        />
+        <Stack.Screen
+          name="import/review"
+          options={{ presentation: 'modal', title: t('modal.stackImportReview') }}
+        />
+      </Stack>
+      <StatusBar style="auto" />
+    </ThemeProvider>
   );
 }
