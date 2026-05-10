@@ -42,13 +42,12 @@ jest.mock('expo-sharing', () => ({
 
 jest.mock('@expo/ui/swift-ui', () => {
   const React = require('react');
-  const Tab = ({ children }: any) => React.createElement(React.Fragment, null, children);
-  const TabView = Object.assign(
-    ({ children }: any) => React.createElement(React.Fragment, null, children),
-    { Tab }
-  );
+  const passthrough = ({ children }: any) => React.createElement(React.Fragment, null, children);
+  const Tab = passthrough;
+  const TabView = Object.assign(passthrough, { Tab });
   return {
-    Host: ({ children }: any) => React.createElement(React.Fragment, null, children),
+    Host: passthrough,
+    RNHostView: passthrough,
     TabView,
   };
 });

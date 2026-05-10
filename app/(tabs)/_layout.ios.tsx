@@ -1,4 +1,4 @@
-import { Host, TabView } from '@expo/ui/swift-ui';
+import { Host, RNHostView, TabView } from '@expo/ui/swift-ui';
 import { frame, tabViewStyle } from '@expo/ui/swift-ui/modifiers';
 import { StyleSheet, View } from 'react-native';
 
@@ -27,24 +27,32 @@ export default function TabLayoutIOS() {
         modifiers={[fillFrame, tabViewStyle({ type: 'automatic' })]}
       >
         <TabView.Tab value="upcoming" label={t('nav.upcoming')} systemImage="gift.fill">
-          <View style={styles.page}>
-            <UpcomingScreen />
-          </View>
+          <RNHostView>
+            <View style={styles.page}>
+              <UpcomingScreen />
+            </View>
+          </RNHostView>
         </TabView.Tab>
         <TabView.Tab value="family" label={t('nav.family')} systemImage="person.2.fill">
-          <View style={styles.page}>
-            <FamilyScreen />
-          </View>
+          <RNHostView>
+            <View style={styles.page}>
+              <FamilyScreen />
+            </View>
+          </RNHostView>
         </TabView.Tab>
         <TabView.Tab value="friends" label={t('nav.friends')} systemImage="person.3.fill">
-          <View style={styles.page}>
-            <FriendsScreen />
-          </View>
+          <RNHostView>
+            <View style={styles.page}>
+              <FriendsScreen />
+            </View>
+          </RNHostView>
         </TabView.Tab>
         <TabView.Tab value="settings" label={t('nav.settings')} systemImage="gear">
-          <View style={styles.page}>
-            <SettingsScreen />
-          </View>
+          <RNHostView>
+            <View style={styles.page}>
+              <SettingsScreen />
+            </View>
+          </RNHostView>
         </TabView.Tab>
       </TabView>
     </Host>
@@ -52,10 +60,12 @@ export default function TabLayoutIOS() {
 }
 
 const styles = StyleSheet.create({
-  // Host bridges SwiftUI ↔ RN; flex:1 gives the SwiftUI tree the screen height.
+  // Outer Host bridges SwiftUI ↔ RN; flex:1 gives the SwiftUI tree the screen height.
   host: { flex: 1 },
-  // Each Tab's RN children get rendered into the SwiftUI page area; flex:1
-  // here means the wrapped screen component fills the page rather than
-  // collapsing to its content's intrinsic height.
+  // Each Tab's RN children render inside an RNHostView, which by default
+  // takes the size of the parent SwiftUI page. flex:1 on this wrapper makes
+  // the screen component fill that page rather than collapsing to its
+  // intrinsic content height.
   page: { flex: 1 },
 });
+
