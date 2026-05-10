@@ -49,6 +49,10 @@ jest.mock('@expo/ui/swift-ui', () => {
   };
 });
 
+jest.mock('@expo/ui/swift-ui/modifiers', () => ({
+  ignoreSafeArea: () => ({}),
+}));
+
 jest.mock('expo-router', () => ({
   router: { push: jest.fn(), back: jest.fn(), replace: jest.fn() },
   useRouter: () => ({ push: jest.fn(), back: jest.fn(), replace: jest.fn() }),
