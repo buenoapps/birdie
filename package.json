@@ -16,7 +16,6 @@
     "test:watch": "jest --watch"
   },
   "dependencies": {
-    "@expo/ui": "^56.0.4",
     "@expo/vector-icons": "^15.0.3",
     "date-fns": "^4.1.0",
     "expo": "~56.0.0-preview.7",

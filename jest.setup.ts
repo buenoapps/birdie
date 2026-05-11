@@ -37,23 +37,6 @@ jest.mock('expo-sharing', () => ({
   shareAsync: jest.fn().mockResolvedValue(undefined),
 }));
 
-jest.mock('@expo/ui/swift-ui', () => {
-  const React = require('react');
-  const passthrough = ({ children }: any) => React.createElement(React.Fragment, null, children);
-  const Tab = passthrough;
-  const TabView = Object.assign(passthrough, { Tab });
-  return {
-    Host: passthrough,
-    RNHostView: passthrough,
-    TabView,
-  };
-});
-
-jest.mock('@expo/ui/swift-ui/modifiers', () => ({
-  ignoreSafeArea: () => ({}),
-  tint: () => ({}),
-}));
-
 jest.mock('expo-router', () => ({
   router: { push: jest.fn(), back: jest.fn(), replace: jest.fn() },
   useRouter: () => ({ push: jest.fn(), back: jest.fn(), replace: jest.fn() }),
