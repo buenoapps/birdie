@@ -1,7 +1,8 @@
 import { Host, RNHostView, TabView } from '@expo/ui/swift-ui';
-import { ignoreSafeArea } from '@expo/ui/swift-ui/modifiers';
+import { ignoreSafeArea, tint } from '@expo/ui/swift-ui/modifiers';
 import { StyleSheet } from 'react-native';
 
+import { Brand } from '@/constants/theme';
 import { useTabSelection, type TabName } from '@/hooks/use-tab-selection';
 import { t } from '@/lib/i18n';
 
@@ -17,6 +18,9 @@ import SettingsScreen from './settings';
 // SwiftUI side so the RN tree owns the safe-area layout end-to-end.
 const fillTab = [ignoreSafeArea({ edges: 'all' })];
 
+// Match the active tab indicator to the PrimaryButton primary background.
+const tabViewModifiers = [tint(Brand.partyPink)];
+
 export default function TabLayoutIOS() {
   const { activeTab, setActiveTab } = useTabSelection();
 
@@ -25,6 +29,7 @@ export default function TabLayoutIOS() {
       <TabView
         selection={activeTab}
         onSelectionChange={(v) => setActiveTab(v as TabName)}
+        modifiers={tabViewModifiers}
       >
         <TabView.Tab value="upcoming" label={t('nav.upcoming')} systemImage="gift.fill" modifiers={fillTab}>
           <RNHostView>
