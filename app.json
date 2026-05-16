@@ -58,7 +58,8 @@
     ],
     "experiments": {
       "typedRoutes": true,
-      "reactCompiler": true
+      "reactCompiler": true,
+      "baseUrl": "/birdie"
     },
     "owner": "buenoapps",
     "extra": {

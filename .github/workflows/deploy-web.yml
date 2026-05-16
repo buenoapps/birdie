@@ -1,0 +1,52 @@
+name: Deploy web
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# A single concurrent deploy at a time. Cancel any in-progress deploy when a
+# newer push lands.
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build web bundle
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - run: npm ci
+      - run: npx expo export --platform web
+      # `.nojekyll` disables GitHub Pages' Jekyll preprocessing, which would
+      # otherwise strip the underscored `_expo/` folder (the JS bundle).
+      - run: touch dist/.nojekyll
+      # GitHub Pages serves `404.html` for any unmatched path. Reuse
+      # expo-router's static fallback so client-side routing handles dynamic
+      # routes like /family/[id] on direct hits.
+      - run: cp dist/+not-found.html dist/404.html
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
