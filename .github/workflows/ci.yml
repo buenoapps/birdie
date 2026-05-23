@@ -24,11 +24,7 @@ jobs:
       - run: npm run lint
       - run: npx tsc --noEmit
       - run: npm test -- --ci
-      # `--no-bytecode` skips the Hermes bytecode step. The Linux Hermes
-      # compiler bundled with RN 0.83 / SDK 56 preview can't compile JS
-      # private-class-fields used by some upstream deps; the actual EAS iOS
-      # build does its own Hermes step on macOS where this isn't an issue.
-      - run: npx expo export --platform ios --no-bytecode
+      - run: npx expo export --platform ios
 
   eas-build:
     name: EAS iOS build
