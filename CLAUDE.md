@@ -30,7 +30,7 @@ CI (`.github/workflows/ci.yml`) runs the same four steps on every PR against `ma
 ## Architecture
 
 ### Routing
-File-based via `expo-router`. The four tabs live in `app/(tabs)/`. Modals are top-level routes with `presentation: 'modal'` declared in `app/_layout.tsx`. Tab-tap-to-scroll-top is wired via `useScrollToTop` from `@react-navigation/native` in each tab screen.
+File-based via `expo-router`. The four tabs live in `app/(tabs)/`. Modals are top-level routes with `presentation: 'modal'` declared in `app/_layout.tsx`.
 
 ### Data layer
 - `db/index.ts` opens the SQLite database lazily and runs migrations from `db/schema.ts`.
