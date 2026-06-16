@@ -4,7 +4,7 @@ Notes for AI assistants working in this repo. Read this first.
 
 ## What this app is
 
-Birdie is a local-first birthday tracker built with **Expo SDK 54 / React Native 0.81 / React 19**. It tracks family members and friends, links friends to one or more family members, and fires hourly local notifications (08:00–21:00) on each birthday until the user marks the message as sent.
+Birdie is a local-first birthday tracker built with **Expo SDK 56 / React Native 0.85 / React 19**. It tracks family members and friends, links friends to one or more family members, and fires hourly local notifications (08:00–21:00) on each birthday until the user marks the message as sent.
 
 Everything is on-device — SQLite for persistence, `expo-notifications` for local reminders. No backend.
 

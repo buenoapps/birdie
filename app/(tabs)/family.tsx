@@ -1,7 +1,6 @@
 import { useRouter, useScrollToTop } from 'expo-router';
 import { useRef } from 'react';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { EmptyState } from '@/components/ui/EmptyState';
 import { IconSymbol } from '@/components/ui/icon-symbol';
@@ -9,6 +8,7 @@ import { PrimaryButton } from '@/components/ui/PrimaryButton';
 import { Brand, Colors } from '@/constants/theme';
 import { useBirdieData } from '@/hooks/use-birdie-data';
 import { useColorScheme } from '@/hooks/use-color-scheme';
+import { useTabContentInsets } from '@/hooks/use-tab-content-insets';
 import { ageOnNextBirthday, daysUntil, formatRelativeDays } from '@/lib/dates';
 import { t } from '@/lib/i18n';
 
@@ -16,13 +16,14 @@ export default function FamilyTab() {
   const router = useRouter();
   const scheme = useColorScheme() ?? 'light';
   const colors = Colors[scheme];
+  const insets = useTabContentInsets();
   const { family } = useBirdieData();
   const scrollRef = useRef<ScrollView>(null);
   useScrollToTop(scrollRef);
 
   return (
-    <SafeAreaView edges={['top']} style={[styles.safe, { backgroundColor: colors.background }]}>
-      <View style={styles.header}>
+    <View style={[styles.safe, { backgroundColor: colors.background }]}>
+      <View style={[styles.header, { paddingTop: insets.top + 8 }]}>
         <Text style={[styles.title, { color: colors.text }]}>{t('screen.family.title')}</Text>
         <Pressable
           onPress={() => router.push('/family/new' as never)}
@@ -35,7 +36,7 @@ export default function FamilyTab() {
       </View>
 
       {family.length === 0 ? (
-        <View style={styles.empty}>
+        <View style={[styles.empty, { paddingBottom: insets.bottom }]}>
           <EmptyState
             title={t('screen.family.emptyTitle')}
             body={t('screen.family.emptyBody')}
@@ -45,7 +46,11 @@ export default function FamilyTab() {
           </View>
         </View>
       ) : (
-        <ScrollView ref={scrollRef} contentContainerStyle={styles.list}>
+        <ScrollView
+          ref={scrollRef}
+          contentContainerStyle={[styles.list, { paddingBottom: insets.bottom + 24 }]}
+          scrollIndicatorInsets={{ bottom: insets.bottom }}
+        >
           {family.map((member) => {
             const age = ageOnNextBirthday(member.birthday);
             const days = daysUntil(member.birthday);
@@ -72,7 +77,7 @@ export default function FamilyTab() {
           })}
         </ScrollView>
       )}
-    </SafeAreaView>
+    </View>
   );
 }
 

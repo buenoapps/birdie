@@ -4,13 +4,13 @@ import { useRouter, useScrollToTop } from 'expo-router';
 import * as Sharing from 'expo-sharing';
 import { useEffect, useRef, useState } from 'react';
 import { Alert, ScrollView, StyleSheet, Text, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Birdie } from '@/components/mascot/Birdie';
 import { PrimaryButton } from '@/components/ui/PrimaryButton';
 import { Colors } from '@/constants/theme';
 import { useBirdieData } from '@/hooks/use-birdie-data';
 import { useColorScheme } from '@/hooks/use-color-scheme';
+import { useTabContentInsets } from '@/hooks/use-tab-content-insets';
 import { buildCsvExport, buildJsonExport, exportFilename } from '@/lib/export';
 import { t } from '@/lib/i18n';
 import { annotateDuplicates, parse, setStagedImport } from '@/lib/import';
@@ -24,6 +24,7 @@ export default function SettingsTab() {
   const router = useRouter();
   const scheme = useColorScheme() ?? 'light';
   const colors = Colors[scheme];
+  const insets = useTabContentInsets();
   const { family, friends, refresh } = useBirdieData();
   const [granted, setGranted] = useState<boolean | null>(null);
   const scrollRef = useRef<ScrollView>(null);
@@ -96,8 +97,15 @@ export default function SettingsTab() {
   };
 
   return (
-    <SafeAreaView edges={['top']} style={[styles.safe, { backgroundColor: colors.background }]}>
-      <ScrollView ref={scrollRef} contentContainerStyle={styles.scroll}>
+    <View style={[styles.safe, { backgroundColor: colors.background }]}>
+      <ScrollView
+        ref={scrollRef}
+        contentContainerStyle={[
+          styles.scroll,
+          { paddingTop: insets.top + 8, paddingBottom: insets.bottom + 24 },
+        ]}
+        scrollIndicatorInsets={{ bottom: insets.bottom }}
+      >
         <View style={styles.heroBox}>
           <Birdie size={120} />
           <Text style={[styles.title, { color: colors.text }]}>{t('screen.upcoming.title')}</Text>
@@ -157,7 +165,7 @@ export default function SettingsTab() {
           <PrimaryButton variant="ghost" title={t('screen.settings.refreshCta')} onPress={() => refresh()} />
         </Section>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 }
 

@@ -1,7 +1,6 @@
 import { useRouter, useScrollToTop } from 'expo-router';
 import { useMemo, useRef } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { BirthdayCard } from '@/components/birthday/BirthdayCard';
 import { BirdieHead } from '@/components/mascot/BirdieHead';
@@ -10,6 +9,7 @@ import { Colors } from '@/constants/theme';
 import type { UpcomingBirthday } from '@/db/types';
 import { useBirdieData } from '@/hooks/use-birdie-data';
 import { useColorScheme } from '@/hooks/use-color-scheme';
+import { useTabContentInsets } from '@/hooks/use-tab-content-insets';
 import { bucketFor } from '@/lib/dates';
 import { t } from '@/lib/i18n';
 
@@ -30,6 +30,7 @@ export default function UpcomingScreen() {
   const router = useRouter();
   const scheme = useColorScheme() ?? 'light';
   const colors = Colors[scheme];
+  const insets = useTabContentInsets();
   const { upcoming, ready } = useBirdieData();
   const scrollRef = useRef<ScrollView>(null);
   useScrollToTop(scrollRef);
@@ -37,8 +38,8 @@ export default function UpcomingScreen() {
   const sections = useMemo(() => groupByBucket(upcoming), [upcoming]);
 
   return (
-    <SafeAreaView edges={['top']} style={[styles.safe, { backgroundColor: colors.background }]}>
-      <View style={styles.header}>
+    <View style={[styles.safe, { backgroundColor: colors.background }]}>
+      <View style={[styles.header, { paddingTop: insets.top + 8 }]}>
         <BirdieHead size={56} />
         <View style={{ flex: 1 }}>
           <Text style={[styles.title, { color: colors.text }]}>{t('screen.upcoming.title')}</Text>
@@ -49,14 +50,18 @@ export default function UpcomingScreen() {
       </View>
 
       {ready && upcoming.length === 0 ? (
-        <View style={styles.empty}>
+        <View style={[styles.empty, { paddingBottom: insets.bottom }]}>
           <EmptyState
             title={t('screen.upcoming.emptyTitle')}
             body={t('screen.upcoming.emptyBody')}
           />
         </View>
       ) : (
-        <ScrollView ref={scrollRef} contentContainerStyle={styles.list}>
+        <ScrollView
+          ref={scrollRef}
+          contentContainerStyle={[styles.list, { paddingBottom: insets.bottom + 24 }]}
+          scrollIndicatorInsets={{ bottom: insets.bottom }}
+        >
           {sections.map(({ key, items }) => (
             <View key={key} style={styles.section}>
               <Text style={[styles.sectionTitle, { color: colors.textMuted }]}>
@@ -77,7 +82,7 @@ export default function UpcomingScreen() {
           ))}
         </ScrollView>
       )}
-    </SafeAreaView>
+    </View>
   );
 }
 
